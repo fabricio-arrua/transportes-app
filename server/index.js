@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+const app = express();
 
 const db = mysql.createPool({
     host: 'mysql_db',
@@ -11,12 +12,11 @@ const db = mysql.createPool({
 
 app.use(cors())
 
-const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.send('Hi There')
+    res.send('Todo esta OK!')
   });
 
 //obtener todos los transportes de la BD
