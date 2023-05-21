@@ -6,7 +6,7 @@ import { Button, Container, Card, Row } from 'react-bootstrap'
 function App() {
   return (
     <div className="App">
-      <h1>TETAS</h1>
+      <h1>ESTOY CORRIENDO DESDE EL SERVIDOR!</h1>
     </div>
   );
 }
