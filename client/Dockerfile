@@ -1,4 +1,4 @@
-FROM node:14 AS Production
+FROM node:17-alpine AS Production
 
 ENV NODE_ENV=production
 
@@ -11,6 +11,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+EXPOSE 3000
 
-CMD ["sh", "-c", "npm start:production"]
+CMD ["npm", "start"]
