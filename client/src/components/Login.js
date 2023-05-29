@@ -7,20 +7,19 @@ export const Login = () => {
   const [usu, setUsu] = useState("");
   const [pas, setPas] = useState("");
 
-
   function iniciarSesion(e){
     e.preventDefault();
     var txtusu = document.getElementById("txtusu").value;
     var txtpas = document.getElementById("txtpas").value;
     if(txtusu.length===0 || txtpas.length===0){
-      alert("Complete Los Datos Faltantes!!");
+      alert("Complete los datos que faltan!");
     }else{
       if(usu === "admin" && pas==="123"){
         setMiLogin("true");
         document.getElementById("form_login").style.display = "true";
       }else{
         setMiLogin("false");
-        alert("Error De Usuario y/o Contraseña!!");
+        alert("Error de usuario y/o contraseña!");
         document.getElementById("txtusu").value = "";
         document.getElementById("txtpas").value = "";
         document.getElementById("txtusu").focus();
@@ -29,10 +28,7 @@ export const Login = () => {
     }
   }
 
-
   return (
-    
-       
     <div className="App">
       <div class="container-form sign-in">
         <form class="form_login">

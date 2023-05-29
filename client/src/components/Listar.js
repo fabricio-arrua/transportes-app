@@ -15,7 +15,7 @@ export const Listar = () => {
   const [registroslogin, setRegistrosLogin] = useState(obtenerRegistros());
 
   const botonEliminar = (miIndex) => {
-    if(window.confirm("¿Está Seguro De Querer Eliminar El Chofer?")){
+    if(window.confirm("¿Está seguro de querer eliminar el chofer?")){
       var registrosFiltrados = registroslogin.filter((e, index) => {
           return miIndex !== index
       });
@@ -37,7 +37,7 @@ export const Listar = () => {
     <div className="bg-light" style={{marginTop:20, padding:20}}>
 
     <div className="h3">
-      Listado De Registro De Choferes
+      Listado de registro de choferes
     </div>
 
     <div className="table-responsive">
@@ -75,7 +75,7 @@ export const Listar = () => {
         </table>
       </> 
       
-      : <p className='h5' style={{color:"red"}}>"No Hay Choferes para listar"</p>
+      : <p className='h5' style={{color:"red"}}>"No hay choferes para listar"</p>
       }
       
     </div>

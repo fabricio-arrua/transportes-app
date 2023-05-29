@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { NavLink } from "react-router-dom"
-import { Registrar } from "./Registrar"
 import { Listar } from "./Listar"
 import { SolicitudesMecanicos } from "./SolicitudesMecanicos "
 
 export const Menu = (props) => {
 
-  const [reg, setReg] = useState("");
   const [lis, setLis] = useState("");
   const [est, setEst] = useState("");
  
@@ -20,32 +18,17 @@ export const Menu = (props) => {
     document.getElementById("txtusu").focus();
   }
 
-
-  function op_registrar(){
-    setReg("1");
-    setLis("0");
-    setEst("0");
-  }
-
-
   function op_listar(){
-    setReg("0");
     setLis("1");
     setEst("0");
   }
 
-
   function op_solicitudes(){
-    setReg("0");
     setLis("0");
     setEst("1");
   }
 
-
-
   return (
-    
-    
     <>
         
     <div id="caja_menu" style={{textAlign:"left"}}>
@@ -64,7 +47,6 @@ export const Menu = (props) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <NavLink to="" className="nav-link  h5  text-center"  onClick={ op_registrar } >Registrar </NavLink>
             <NavLink to="" className="nav-link  h5  text-center"  onClick={ op_listar } >Listar Choferes</NavLink>
             <NavLink to="" className="nav-link  h5  text-center"  onClick={ op_solicitudes } >Solicitudes Mecanicos</NavLink>
             <a className="nav-link  h5  text-center"  style={{color:"blue"}}  href=" "  onClick={ cerrarSesion } >Cerrar Sesión</a>
@@ -74,14 +56,9 @@ export const Menu = (props) => {
     </nav>
   </div>
 
-  { reg === "1" && <Registrar/> }
   { lis === "1" && <Listar/>}
   { est === "1" && <SolicitudesMecanicos/> }
 
 </>
-  
-
-
-
   )
 }

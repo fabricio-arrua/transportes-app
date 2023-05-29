@@ -11,14 +11,7 @@ export const SolicitudesMecanicos = () => {
     }
   }
 
-
-
-
-
   return (
-    
-
-          
     <div className="bg-light" style={{marginTop:20, padding:20}}>
 
     <div className="h3">
@@ -26,19 +19,11 @@ export const SolicitudesMecanicos = () => {
     </div>
 
     <div className="table-responsive">
-      
       {        
-
-         <p className="h5" style={{color:"red"}}>"No Hay Pedidos por parte de los mecanicos!!"</p>
-        }
-
+        <p className="h5" style={{color:"red"}}>"No hay pedidos por parte de los mecanicos!!"</p>
+      }
     </div>
- 
   </div>
-
-
-
-
 
   )
 }
