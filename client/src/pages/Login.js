@@ -40,6 +40,8 @@ class Login extends Component {
         cookies.set('nombre_completo', respuesta.nombre_completo, {path: '/'});
 
         alert(`Bienvenido ${respuesta.nombre_completo}`);
+
+        window.location.href='./menu';
       } else {
         alert('El usuario o la contraseña no son correctos.');
       }
@@ -48,6 +50,12 @@ class Login extends Component {
       console.log(error);
     })
   }
+
+  componentDidMount() { 
+    if(cookies.get('usuario')){
+      window.location.href='./menu';
+    }
+   }
 
   render() {
     return (
