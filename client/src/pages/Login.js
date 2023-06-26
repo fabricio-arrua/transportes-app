@@ -28,9 +28,7 @@ class Login extends Component {
   iniciarSesion = async () => {
     await axios.get(baseUrl, {params: {usuario: this.state.form.username, contrasenia: this.state.form.password}})
     .then(response => {
-
       if (response.data.message != 'Datos ingresados incorrectos') {
-
         cookies.set('usuario', response.data.usuario, {path: '/'});
         cookies.set('nombre_completo', response.data.nombre_completo, {path: '/'});
 
