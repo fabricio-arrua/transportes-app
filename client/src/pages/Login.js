@@ -27,19 +27,14 @@ class Login extends Component {
 
   iniciarSesion = async () => {
     await axios.get(baseUrl, {params: {usuario: this.state.form.username, contrasenia: this.state.form.password}})
-    /*.then(response => {
-      console.log(response.data);
-    })*/
     .then(response => {
-      return response.data;
-    })
-    .then(response => {
-      if (response.length > 0) {
-        var respuesta = response[0];
-        cookies.set('usuario', respuesta.username, {path: '/'});
-        cookies.set('nombre_completo', respuesta.nombre_completo, {path: '/'});
 
-        alert(`Bienvenido ${respuesta.nombre_completo}`);
+      if (response.data.message != 'Datos ingresados incorrectos') {
+
+        cookies.set('usuario', response.data.usuario, {path: '/'});
+        cookies.set('nombre_completo', response.data.nombre_completo, {path: '/'});
+
+        alert(`Bienvenido ${response.data.nombre_completo}`);
 
         window.location.href='./menu';
       } else {
