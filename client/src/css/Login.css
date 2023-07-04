@@ -11,3 +11,9 @@
 .containerSecundario {
   text-align: center;
 }
+
+.texto-error {
+  background: salmon;
+  color: red;
+  font-weight: bold;
+}
