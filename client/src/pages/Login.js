@@ -83,28 +83,38 @@ class Login extends Component {
   render() {
     return (
       <div className='containerPrincipal'>
+        <h1 className='titulo'>Iniciar sesión: </h1>
+        <br />
+        <br />
         <div className='containerSecundario'>
         <span className="texto-error">{this.state.msgError}</span>
             <div className='form-group'>
-              <label>Usuario: </label>
+              <label>Usuario</label>
               <br />
               <input
                 type='text'
+                placeholder='Ingrese su usuario'
                 className='form-control'
                 name='username'
                 onChange={this.handleChange}
               />
               <br />
-              <label>Contraseña: </label>
+              <label>Contraseña</label>
               <br />
               <input
                 type='password'
+                placeholder='Ingrese su contraseña'
                 className='form-control'
                 name='password'
                 onChange={this.handleChange}
               />
               <br />
-              <button className='btn btn-primary' onClick={() => this.iniciarSesion()}>Iniciar sesión</button>
+              <br />
+              <div className='container'>
+                <div className='center'>
+                  <button class='boton' role='button' onClick={() => this.iniciarSesion()}><span class="text">Ingresar</span></button>
+                </div>
+              </div>
             </div>
         </div>
       </div>
