@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
+import "../css/Menu.css";
 
 const cookies = new Cookies();
 
