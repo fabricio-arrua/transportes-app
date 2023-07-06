@@ -62,7 +62,7 @@ class Login extends Component {
           cookies.set('usuario', response.data.usuario, {path: '/'});
           cookies.set('nombre_completo', response.data.nombre_completo, {path: '/'});
 
-          alert(`Bienvenido ${response.data.nombre_completo}`);
+          //alert(`Bienvenido ${response.data.nombre_completo}`);
 
           window.location.href='./menu';
         } else {
@@ -84,10 +84,10 @@ class Login extends Component {
     return (
       <div className='containerPrincipal'>
         <h1 className='titulo'>Iniciar sesión: </h1>
+        <span className="texto-error">{this.state.msgError}</span>
         <br />
         <br />
         <div className='containerSecundario'>
-        <span className="texto-error">{this.state.msgError}</span>
             <div className='form-group'>
               <label>Usuario</label>
               <br />
