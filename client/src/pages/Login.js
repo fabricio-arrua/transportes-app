@@ -3,6 +3,8 @@ import "../css/Login.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import * as AiIcons from "react-icons/ai";
+import * as RiIcons from "react-icons/ri";
 
 const baseUrl = 'http://localhost:4000/api/empleados/logueo';
 const cookies = new Cookies();
@@ -56,15 +58,14 @@ class Login extends Component {
   }
 
   iniciarSesion = async () => {
-    await axios.get(baseUrl, {params: {usuario: this.state.form.username, contrasenia: this.state.form.password}})
+    await axios.post(baseUrl, {params: {usuario: this.state.form.username, contrasenia: this.state.form.password}})
       .then(response => {
+        //console.log(response.data);
         if (response.data.message != 'Datos ingresados incorrectos') {
           cookies.set('usuario', response.data.usuario, {path: '/'});
-          cookies.set('nombre_completo', response.data.nombre_completo, {path: '/'});
+          cookies.set('nombre_completo', response.data.nombre_completo, {path: '/'}); 
 
-          //alert(`Bienvenido ${response.data.nombre_completo}`);
-
-          window.location.href='./menu';
+          window.location.href='./homeadmin';
         } else {
           this.submit();
         }
@@ -76,7 +77,7 @@ class Login extends Component {
 
   componentDidMount() { 
     if(cookies.get('usuario')){
-      window.location.href='./menu';
+      window.location.href='./homeadmin';
     }
    }
 
@@ -89,8 +90,9 @@ class Login extends Component {
         <br />
         <div className='containerSecundario'>
             <div className='form-group'>
-              <label>Usuario</label>
-              <br />
+              <div >
+                <AiIcons.AiOutlineUser className='iconoUsuario'/><label>Usuario</label>
+              </div>
               <input
                 type='text'
                 placeholder='Ingrese su usuario'
@@ -99,8 +101,9 @@ class Login extends Component {
                 onChange={this.handleChange}
               />
               <br />
-              <label>Contraseña</label>
-              <br />
+              <div>
+                <RiIcons.RiLockPasswordLine className='iconoPassword'/><label>Contraseña</label>
+              </div>
               <input
                 type='password'
                 placeholder='Ingrese su contraseña'
