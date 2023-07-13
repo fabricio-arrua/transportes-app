@@ -13,6 +13,8 @@ const defaultState = {
   msgError: '',
 };
 
+const redireccion = '';
+
 class Login extends Component {
 
   state = {
@@ -58,21 +60,34 @@ class Login extends Component {
   }
 
   iniciarSesion = async () => {
-    await axios.post(baseUrl, {params: {usuario: this.state.form.username, contrasenia: this.state.form.password}})
-      .then(response => {
-        //console.log(response.data);
-        if (response.data.message != 'Datos ingresados incorrectos') {
-          cookies.set('usuario', response.data.usuario, {path: '/'});
-          cookies.set('nombre_completo', response.data.nombre_completo, {path: '/'}); 
+    await axios.post(baseUrl, {usuario: this.state.form.username, contrasenia: this.state.form.password},{
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+    .then(response => {    
+      if (response.data.length > 0) {
 
-          window.location.href='./homeadmin';
-        } else {
-          this.submit();
+        cookies.set('usuario', response.data[0].usuario, {path: '/'});
+        cookies.set('nombre_completo', response.data[0].nombre_completo, {path: '/'});
+
+        alert(`Bienvenido ${response.data[0].nombre_completo}`);
+
+        if (response.data[0].tipo == 'A'){
+          redireccion='./menuAdmin';
         }
-      })
-      .catch(error => {
-        console.log(error);
-      }) 
+        else if(response.data[0].tipo == 'T'){
+          redireccion='./menuTecnico';
+        }
+
+        window.location.href=redireccion;
+      } else {
+        this.submit();
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }
 
   componentDidMount() { 
