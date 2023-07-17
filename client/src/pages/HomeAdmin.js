@@ -14,9 +14,9 @@ export default class HomeAdmin extends Component {
   }
     
   componentDidMount() { 
-    if(!cookies.get('nombre_completo')){
+    if(cookies.get('tipo') !== 'A'){
       window.location.href='./';
-    }  
+    }
   }
     
   render() {

@@ -14,7 +14,7 @@ export default class HomeTecnico extends Component {
   }
     
   componentDidMount() { 
-    if(!cookies.get('nombre_completo')){
+    if(cookies.get('tipo') !== 'T'){
       window.location.href='./';
     }
   }
