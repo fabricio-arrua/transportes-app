@@ -4,10 +4,10 @@ import '../css/Rutas.css'
 
 //pages
 import Login from '../pages/Login';
-import HomeAdmin from '../pages/HomeAdmin';
-import ABMChoferes from '../pages/ABMChoferes';
-import ABMTecnicos from '../pages/ABMTecnicos';
-import HomeTecnico from '../pages/HomeTecnico';
+import HomeAdmin from '../pages/admin/HomeAdmin';
+import ABMChoferes from '../pages/admin/ABMChoferes';
+import ABMTecnicos from '../pages/admin/ABMTecnicos';
+import HomeTecnico from '../pages/tecnico/HomeTecnico';
 
 //components
 import Navbar from '../components/Navbar';
