@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-export default class HomeAdmin extends Component {
+export default class HomeTecnico extends Component {
 
   cerrarSesion = () => {
     cookies.remove('usuario', {path: '/'});
@@ -16,7 +16,7 @@ export default class HomeAdmin extends Component {
   componentDidMount() { 
     if(!cookies.get('nombre_completo')){
       window.location.href='./';
-    }  
+    }
   }
     
   render() {
@@ -25,7 +25,7 @@ export default class HomeAdmin extends Component {
     console.log('Tipo: ' + cookies.get('tipo'));
     return (
       <div>
-        BIENVENIDO ADMINISTRADOR!!
+        BIENVENIDO TÉCNICO!!
 
         <br />
         <button onClick={()=>this.cerrarSesion()}>Cerrar sesión</button>

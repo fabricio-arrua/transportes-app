@@ -7,6 +7,7 @@ import Login from '../pages/Login';
 import HomeAdmin from '../pages/HomeAdmin';
 import ABMChoferes from '../pages/ABMChoferes';
 import ABMTecnicos from '../pages/ABMTecnicos';
+import HomeTecnico from '../pages/HomeTecnico';
 
 //components
 import Navbar from '../components/Navbar';
@@ -22,6 +23,7 @@ function Rutas() {
         <Routes>
           <Route exact path='/' Component={Login}/>
           <Route exact path='/homeadmin' Component={HomeAdmin}/>
+          <Route exact path='/hometecnico' Component={HomeTecnico}/>
           <Route exact path='/abmchoferes' Component={ABMChoferes}/>
           <Route exact path='/abmtecnicos' Component={ABMTecnicos}/>
         </Routes>

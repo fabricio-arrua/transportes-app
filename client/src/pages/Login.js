@@ -13,7 +13,7 @@ const defaultState = {
   msgError: '',
 };
 
-const redireccion = '';
+var redireccion = '';
 
 class Login extends Component {
 
@@ -70,14 +70,13 @@ class Login extends Component {
 
         cookies.set('usuario', response.data[0].usuario, {path: '/'});
         cookies.set('nombre_completo', response.data[0].nombre_completo, {path: '/'});
+        cookies.set('tipo', response.data[0].Tipo, {path: '/'})
 
-        alert(`Bienvenido ${response.data[0].nombre_completo}`);
-
-        if (response.data[0].tipo == 'A'){
-          redireccion='./menuAdmin';
+        if (response.data[0].tipo === 'A'){
+          redireccion='./homeadmin';
         }
-        else if(response.data[0].tipo == 'T'){
-          redireccion='./menuTecnico';
+        else if(response.data[0].tipo === 'T'){
+          redireccion='./hometecnico';
         }
 
         window.location.href=redireccion;
@@ -90,11 +89,13 @@ class Login extends Component {
     })
   }
 
-  componentDidMount() { 
-    if(cookies.get('usuario')){
+  componentDidMount() {
+    if(cookies.get('tipo') === 'A'){
       window.location.href='./homeadmin';
+    } else if(cookies.get('tipo') === 'T'){
+      window.location.href='./hometecnico';
     }
-   }
+  }
 
   render() {
     return (
@@ -130,7 +131,7 @@ class Login extends Component {
               <br />
               <div className='container'>
                 <div className='center'>
-                  <button class='boton' role='button' onClick={() => this.iniciarSesion()}><span class="text">Ingresar</span></button>
+                  <button class='boton' onClick={() => this.iniciarSesion()}><span class="text">Ingresar</span></button>
                 </div>
               </div>
             </div>
