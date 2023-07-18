@@ -7,9 +7,11 @@
     font-family: 'Lato', sans-serif;
 }
 
-.home,
-.abmchoferes,
-.abmtecnicos {
+.home, .abmchoferes, .abmtecnicos, .abmadmins,
+.abmcamiones, .abmclientes, .abmestadocamion,
+.abmtipocamion, .abmtransportes, .listadochoferessintransporte,
+.listadoclientes, .listadogastos,
+.listadotransportesnorealizados {
     display: flex;
     height: 90vh;
     align-items: center;
