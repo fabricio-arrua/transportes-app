@@ -5,8 +5,8 @@ import '../css/Rutas.css'
 //pages
 import Login from '../pages/Login';
 import HomeAdmin from '../pages/admin/HomeAdmin';
-import ABMChoferes from '../pages/admin/ABMChoferes';
-import ABMTecnicos from '../pages/admin/ABMTecnicos';
+import ABMChoferes from '../pages/admin/abm/ABMChoferes';
+import ABMTecnicos from '../pages/admin/abm/ABMTecnicos';
 import HomeTecnico from '../pages/tecnico/HomeTecnico';
 
 //components
