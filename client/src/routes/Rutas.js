@@ -38,14 +38,14 @@ function Rutas() {
         <Routes>
           <Route exact path='/' Component={Login}/>
           <Route exact path='/homeadmin' Component={HomeAdmin}/>
-          <Route exact path='/abmchoferes' Component={ABMChoferes}/>
-          <Route exact path='/abmtecnicos' Component={ABMTecnicos}/>
-          <Route exact path='/abmadmins' Component={ABMAdmins}/>
-          <Route exact path='/abmcamiones' Component={ABMCamiones}/>
-          <Route exact path='/abmclientes' Component={ABMClientes}/>
-          <Route exact path='/abmestadocamion' Component={ABMEstadoCamion}/>
-          <Route exact path='/abmtipocamion' Component={ABMTipoCamion}/>
-          <Route exact path='/abmtransportes' Component={ABMTransportes}/>
+          <Route exact path='/abm/abmchoferes' Component={ABMChoferes}/>
+          <Route exact path='/abm/abmtecnicos' Component={ABMTecnicos}/>
+          <Route exact path='/abm/abmadmins' Component={ABMAdmins}/>
+          <Route exact path='/abm/abmcamiones' Component={ABMCamiones}/>
+          <Route exact path='/abm/abmclientes' Component={ABMClientes}/>
+          <Route exact path='/abm/abmestadocamion' Component={ABMEstadoCamion}/>
+          <Route exact path='/abm/abmtipocamion' Component={ABMTipoCamion}/>
+          <Route exact path='/abm/abmtransportes' Component={ABMTransportes}/>
           <Route exact path='/listadochoferessintransporte' Component={ListadoChoferesSinTransporte}/>
           <Route exact path='/listadoclientes' Component={ListadoDeClientes}/>
           <Route exact path='/listadogastos' Component={ListadoDeGastos}/>

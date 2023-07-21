@@ -10,7 +10,7 @@
 .home, .abmchoferes, .abmtecnicos, .abmadmins,
 .abmcamiones, .abmclientes, .abmestadocamion,
 .abmtipocamion, .abmtransportes, .listadochoferessintransporte,
-.listadoclientes, .listadogastos,
+.listadodeclientes, .listadodegastos,
 .listadotransportesnorealizados {
     display: flex;
     height: 90vh;
