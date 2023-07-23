@@ -4,6 +4,7 @@ import '../css/Rutas.css'
 
 //pages
 import Login from '../pages/Login';
+import Logout from '../pages/Logout';
 //pages-admin
 import HomeAdmin from '../pages/admin/HomeAdmin';
 import ABMChoferes from '../pages/admin/abm/ABMChoferes';
@@ -54,6 +55,7 @@ function Rutas() {
           <Route exact path='/listadocamionesreparacion' Component={ListadoDeCamionesEnReparacion}/>
           <Route exact path='/registrarmantenimiento' Component={RegistrarMantenimiento}/>
           <Route exact path='/solicitudmateriales' Component={SolicitudDeMateriales}/>
+          <Route exact path='/logout' Component={Logout}/>
         </Routes>
     </BrowserRouter>
   );

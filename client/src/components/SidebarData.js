@@ -91,4 +91,10 @@ export const SidebarData = [
         },
       ]
     },
+    {
+      title: 'Cerrar sesión',
+      path: '/logout',
+      icon: <TbIcons.TbLogout2 />,
+      cName: 'nav-text'
+    },
 ]
