@@ -11,7 +11,7 @@ import * as AiIcons from 'react-icons/ai';
 
 const Nav = styled.div`
   background: #15171c;
-  height: 80px;
+  height: 60px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -20,7 +20,7 @@ const Nav = styled.div`
 const NavIcon = styled(Link)`
   margin-left: 2rem;
   font-size: 2rem;
-  height: 80px;
+  height: 60px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
