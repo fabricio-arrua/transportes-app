@@ -12,6 +12,7 @@ import * as AiIcons from 'react-icons/ai';
 const Nav = styled.div`
   background: #15171c;
   height: 60px;
+  width: 100px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
