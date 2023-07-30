@@ -1,14 +1,16 @@
 import axios from "axios";
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
 import '../../../css/ABMChoferes.css'
 
-const baseURL = "http://localhost:4000/api/empleados/listadoChofer";
+const listadoURL = "http://localhost:4000/api/empleados/listadoChofer";
 
 export default function ABMChoferes() {
-  const [choferes, setChoferes] = React.useState(null);
+  const navigate = useNavigate();
+  const [choferes, setChoferes] = useState(null);
 
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
+    axios.get(listadoURL).then((response) => {
       setChoferes(response.data.listado);
     });
   }, []);
@@ -23,6 +25,8 @@ export default function ABMChoferes() {
         <th>Licencia</th>
         <th>Telefono</th>
         <th>Nombre Completo</th>
+        <th>Modificar</th>
+        <th>Eliminar</th>
       </tr>
       {Object.values(choferes).map((val, key) => {
         return (
@@ -33,10 +37,10 @@ export default function ABMChoferes() {
             <td>{val.nombre_completo}</td>
             <td>
               <button
-                /*onClick={() => navigate(`/post/${val.key}`)}*/
+                onClick={() => navigate(`/abm/abmchoferes/ModChofer`)}
                 className="btn btn-primary"
               >
-                Actualizar
+                Modificar
               </button>
             </td>
             <td>
