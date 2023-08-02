@@ -1,60 +1,82 @@
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import React, {useState} from "react";
-import '../../../css/ABMChoferes.css'
-
-const listadoURL = "http://localhost:4000/api/empleados/listadoChofer";
+import React, { useState, useEffect } from 'react';
+import { Table, Button } from 'semantic-ui-react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function ABMChoferes() {
-  const navigate = useNavigate();
-  const [choferes, setChoferes] = useState(null);
 
-  React.useEffect(() => {
-    axios.get(listadoURL).then((response) => {
-      setChoferes(response.data.listado);
-    });
-  }, []);
+  const [APIData, setAPIData] = useState([]);
+  const [usuario, setUsuario] = useState('');
+  
+  useEffect(() => {
+    axios.get(`http://localhost:4000/api/empleados/listadoChofer`)
+      .then((response) => {
+          setAPIData(response.data.listado);
+      })
+  }, [])
 
-  if (!choferes) return null;
+  const setData = (data) => {
+    let { usuarioC, nro_licencia, telefono, nombre_completo } = data;
+    localStorage.setItem('Usuario', usuarioC);
+    localStorage.setItem('Licencia', nro_licencia);
+    localStorage.setItem('Telefono', telefono);
+    localStorage.setItem('Nombre completo', nombre_completo)
+  }
+
+  const onDelete = (data) => {
+    let { usuarioC } = data;
+    localStorage.setItem('Usuario', usuarioC);
+    setUsuario(localStorage.getItem('Usuario'))
+
+    axios.post(`http://localhost:4000/api/empleados/bajaChofer/`, {
+      usuario
+    })
+    .then(() => {
+      getData();
+    })
+  }
+
+  const getData = () => {
+    axios.get(`http://localhost:4000/api/empleados/listadoChofer`)
+      .then((getData) => {
+        setAPIData(getData.data.listado);
+      })
+  }
 
   return (
-  <div className="App">
-    <table>
-      <tr>
-        <th>Usuario</th>
-        <th>Licencia</th>
-        <th>Telefono</th>
-        <th>Nombre Completo</th>
-        <th>Modificar</th>
-        <th>Eliminar</th>
-      </tr>
-      {Object.values(choferes).map((val, key) => {
-        return (
-          <tr key={key}>
-            <td>{val.usuarioC}</td>
-            <td>{val.nro_licencia}</td>
-            <td>{val.telefono}</td>
-            <td>{val.nombre_completo}</td>
-            <td>
-              <button
-                onClick={() => navigate(`/abm/abmchoferes/ModChofer`)}
-                className="btn btn-primary"
-              >
-                Modificar
-              </button>
-            </td>
-            <td>
-              <button
-                /*onClick={() => handleDelete(val)}*/
-                className="btn btn-danger"
-              >
-                Eliminar
-              </button>
-            </td>
-          </tr>
-        )
-      })}
-    </table>
-  </div>
-  );
+    <div>
+      <Table singleLine>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Usuario</Table.HeaderCell>
+            <Table.HeaderCell>Licencia</Table.HeaderCell>
+            <Table.HeaderCell>Telefono</Table.HeaderCell>
+            <Table.HeaderCell>Nombre completo</Table.HeaderCell>
+            <Table.HeaderCell>Modificar</Table.HeaderCell>
+            <Table.HeaderCell>Eliminar</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+          {Object.values(APIData).map((data) => {
+            return (
+              <Table.Row>
+                  <Table.Cell>{data.usuarioC}</Table.Cell>
+                  <Table.Cell>{data.nro_licencia}</Table.Cell>
+                  <Table.Cell>{data.telefono}</Table.Cell>
+                  <Table.Cell>{data.nombre_completo}</Table.Cell>
+                  <Link to='/abm/abmchoferes/UpdateChofer'>
+                    <Table.Cell> 
+                      <Button onClick={() => setData(data)}>Modificar</Button>
+                    </Table.Cell>
+                  </Link>
+                  <Table.Cell>
+                    <Button onClick={() => {onDelete(data);}}>Eliminar</Button>
+                  </Table.Cell>
+                </Table.Row>
+          )})}
+        </Table.Body>
+      </Table>
+    </div>
+  )
 }
