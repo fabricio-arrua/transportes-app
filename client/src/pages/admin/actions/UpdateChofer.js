@@ -2,7 +2,7 @@ import { Button, Form } from 'semantic-ui-react'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import '../../../css/returnBtn.css';
+import '../../../css/misBtns.css'
 
 export default function UpdateChofer() {
   const [usuario, setUsuario] = useState('');
@@ -35,7 +35,7 @@ export default function UpdateChofer() {
   return (
     <div>
       <Link to='/abm/abmchoferes'>
-        <button className='returnBtn'>Volver</button>
+        <button className='Btn'>Volver</button>
       </Link>
       <Form className="create-form">
         <Form.Field>

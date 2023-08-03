@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import '../../../css/returnBtn.css';
+import '../../../css/misBtns.css';
 
 export default function ABMChoferes() {
 
@@ -47,7 +47,7 @@ export default function ABMChoferes() {
   return (
     <div>
       <Link to='/abm/abmchoferes/createChofer'>
-        <button className='returnBtn'>Crear</button>
+        <button className='Btn'>Crear</button>
       </Link>
       <Table singleLine>
         <Table.Header>
