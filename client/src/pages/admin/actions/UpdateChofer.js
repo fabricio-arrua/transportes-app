@@ -6,7 +6,6 @@ import '../../../css/misBtns.css'
 
 export default function UpdateChofer() {
   const [usuario, setUsuario] = useState('');
-	const [pass, setPassword] = useState('');
   const [licencia, setLicencia] = useState('');
   const [telefono, setTelefono] = useState('');
   const [nombre, setNombre] = useState('');
@@ -23,7 +22,6 @@ export default function UpdateChofer() {
   const updateAPIData = () => {
     axios.post(`http://localhost:4000/api/empleados/modificarChofer`, {
       usuario,
-			pass,
 			nombre,
 			licencia,
 			telefono
@@ -37,14 +35,11 @@ export default function UpdateChofer() {
       <Link to='/abm/abmchoferes'>
         <button className='Btn'>Volver</button>
       </Link>
+      &nbsp;
       <Form className="create-form">
         <Form.Field>
           <label>Usuario</label>
-          <input placeholder='Usuario' value={usuario} onChange={(e) => setUsuario(e.target.value)}/>
-        </Form.Field>
-        <Form.Field>
-          <label>Contraseña</label>
-          <input type='password' placeholder='Contraseña' value={pass} onChange={(e) => setPassword(e.target.value)}/>
+          <input placeholder='Usuario' readonly="readonly" value={usuario} onChange={(e) => setUsuario(e.target.value)}/>
         </Form.Field>
         <Form.Field>
           <label>Nombre completo</label>
@@ -60,6 +55,10 @@ export default function UpdateChofer() {
         </Form.Field>
         <Button type='submit' onClick={updateAPIData}>Modificar</Button>
       </Form>
+      &nbsp;
+      <Link to='/abm/abmchoferes/modPassword'>
+        <button className='Btn'>Cambiar contraseña</button>
+      </Link>
     </div>
   )
 }

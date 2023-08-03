@@ -23,6 +23,7 @@ import ListadoTransportesNoRealizados from '../pages/admin/list/ListadoTransport
 //pages-admin/actions
 import CreateChofer from '../pages/admin/actions/CreateChofer'
 import UpdateChofer from '../pages/admin/actions/UpdateChofer'
+import ModPassword from '../pages/admin/actions/ModPassword'
 //pages-tecnico
 import HomeTecnico from '../pages/tecnico/HomeTecnico';
 import ListadoDeCamionesEnReparacion from '../pages/tecnico/ListadoDeCamionesEnReparacion';
@@ -47,6 +48,7 @@ function Rutas() {
           <Route exact path='/abm/abmchoferes' Component={ABMChoferes}/>
           <Route exact path='/abm/abmchoferes/CreateChofer' Component={CreateChofer}/>
           <Route exact path='/abm/abmchoferes/UpdateChofer' Component={UpdateChofer}/>
+          <Route exact path='/abm/abmchoferes/modPassword' Component={ModPassword}/>
           <Route exact path='/abm/abmtecnicos' Component={ABMTecnicos}/>
           <Route exact path='/abm/abmadmins' Component={ABMAdmins}/>
           <Route exact path='/abm/abmcamiones' Component={ABMCamiones}/>
