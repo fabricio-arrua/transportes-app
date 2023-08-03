@@ -1,7 +1,8 @@
 import { Button, Form } from 'semantic-ui-react'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import '../../../css/returnBtn.css';
 
 export default function UpdateChofer() {
   const [usuario, setUsuario] = useState('');
@@ -32,30 +33,33 @@ export default function UpdateChofer() {
   }
 
   return (
-      <div>
-          <Form className="create-form">
-              <Form.Field>
-                  <label>Usuario</label>
-                  <input placeholder='Usuario' value={usuario} onChange={(e) => setUsuario(e.target.value)}/>
-              </Form.Field>
-							<Form.Field>
-                  <label>Contraseña</label>
-                  <input type='password' placeholder='Contraseña' value={pass} onChange={(e) => setPassword(e.target.value)}/>
-              </Form.Field>
-							<Form.Field>
-                  <label>Nombre completo</label>
-                  <input placeholder='Nombre completo' value={nombre} onChange={(e) => setNombre(e.target.value)}/>
-              </Form.Field>
-              <Form.Field>
-                  <label>Licencia</label>
-                  <input placeholder='Licencia' value={licencia} onChange={(e) => setLicencia(e.target.value)}/>
-              </Form.Field>
-              <Form.Field>
-                  <label>Telefono</label>
-                  <input placeholder='Telefono' value={telefono} onChange={(e) => setTelefono(e.target.value)}/>
-              </Form.Field>
-              <Button type='submit' onClick={updateAPIData}>Modificar</Button>
-          </Form>
-      </div>
+    <div>
+      <Link to='/abm/abmchoferes'>
+        <button className='returnBtn'>Volver</button>
+      </Link>
+      <Form className="create-form">
+        <Form.Field>
+          <label>Usuario</label>
+          <input placeholder='Usuario' value={usuario} onChange={(e) => setUsuario(e.target.value)}/>
+        </Form.Field>
+        <Form.Field>
+          <label>Contraseña</label>
+          <input type='password' placeholder='Contraseña' value={pass} onChange={(e) => setPassword(e.target.value)}/>
+        </Form.Field>
+        <Form.Field>
+          <label>Nombre completo</label>
+          <input placeholder='Nombre completo' value={nombre} onChange={(e) => setNombre(e.target.value)}/>
+        </Form.Field>
+        <Form.Field>
+          <label>Licencia</label>
+          <input placeholder='Licencia' value={licencia} onChange={(e) => setLicencia(e.target.value)}/>
+        </Form.Field>
+        <Form.Field>
+          <label>Telefono</label>
+          <input placeholder='Telefono' value={telefono} onChange={(e) => setTelefono(e.target.value)}/>
+        </Form.Field>
+        <Button type='submit' onClick={updateAPIData}>Modificar</Button>
+      </Form>
+    </div>
   )
 }

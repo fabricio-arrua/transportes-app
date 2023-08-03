@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '../css/Rutas.css'
+import 'semantic-ui-css/semantic.min.css'
 
 //pages
 import Login from '../pages/Login';
@@ -63,7 +64,7 @@ function Rutas() {
           <Route exact path='/solicitudmateriales' Component={SolicitudDeMateriales}/>
           <Route exact path='/logout' Component={Logout}/>
         </Routes>
-        </div>
+      </div>
     </BrowserRouter>
   );
 }
