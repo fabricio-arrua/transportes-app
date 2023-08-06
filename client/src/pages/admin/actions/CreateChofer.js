@@ -6,7 +6,7 @@ import '../../../css/misBtns.css'
 
 export default function CreateChofer() {
   const [usuario, setUsuario] = useState('');
-  const [pass, setPassword] = useState('');
+  const [contrasenia, setContrasenia] = useState('');
   const [licencia, setLicencia] = useState('');
   const [telefono, setTelefono] = useState('');
   const [nombre, setNombre] = useState('');
@@ -16,7 +16,7 @@ export default function CreateChofer() {
   const postData = () => {
 		axios.post(`http://localhost:4000/api/empleados/altaChofer`, {
 			usuario,
-			pass,
+			contrasenia,
 			nombre,
 			licencia,
 			telefono
@@ -37,7 +37,7 @@ export default function CreateChofer() {
         </Form.Field>
         <Form.Field>
           <label>Contraseña</label>
-          <input type='password' placeholder='Contraseña' onChange={(e) => setPassword(e.target.value)}/>
+          <input type='password' placeholder='Contraseña' onChange={(e) => setContrasenia(e.target.value)}/>
         </Form.Field>
         <Form.Field>
           <label>Nombre completo</label>

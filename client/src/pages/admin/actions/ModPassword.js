@@ -6,8 +6,8 @@ import '../../../css/misBtns.css'
 
 export default function ModPassword() {
   const [usuario, setUsuario] = useState('');
-	const [pass, setPassword] = useState('');
-  const [pass2, setPassword2] = useState('');
+	const [contrasenia, setContrasenia] = useState('');
+  const [contrasenia2, setContrasenia2] = useState('');
   const [msgError, setMsgError] = useState('');
 
   const navigate = useNavigate();
@@ -17,10 +17,10 @@ export default function ModPassword() {
   }, []);
 
   const updateAPIData = () => {
-    if(pass === pass2) {
+    if(contrasenia === contrasenia2) {
       axios.post(`http://localhost:4000/api/empleados/ModificarContrasenia`, {
         usuario,
-        pass
+        contrasenia
       }).then(() => {
         navigate('/abm/abmchoferes')
       }).catch(error => {
@@ -44,11 +44,11 @@ export default function ModPassword() {
         </Form.Field>
         <Form.Field>
           <label>Nueva contraseña</label>
-          <input placeholder='Nueva contraseña' value={pass} onChange={(e) => setPassword(e.target.value)}/>
+          <input placeholder='Nueva contraseña' type='password' value={contrasenia} onChange={(e) => setContrasenia(e.target.value)}/>
         </Form.Field>
         <Form.Field>
           <label>Confirmar contraseña</label>
-          <input placeholder='Confirmar contraseña' value={pass2} onChange={(e) => setPassword2(e.target.value)}/>
+          <input placeholder='Confirmar contraseña' type='password' value={contrasenia2} onChange={(e) => setContrasenia2(e.target.value)}/>
         </Form.Field>
         <Form.Field>
           <span className="texto-error">{msgError}</span>
