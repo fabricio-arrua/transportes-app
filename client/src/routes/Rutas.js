@@ -4,7 +4,7 @@ import '../css/Rutas.css'
 import 'semantic-ui-css/semantic.min.css'
 
 //pages
-import Login from '../pages/Login';
+import Login2 from '../pages/Login2';
 import Logout from '../pages/Logout';
 //pages-admin
 import HomeAdmin from '../pages/admin/HomeAdmin';
@@ -43,7 +43,7 @@ function Rutas() {
       </MaybeShowNavBar>
       <div className="main">
         <Routes>
-          <Route exact path='/' Component={Login}/>
+          <Route exact path='/' Component={Login2}/>
           <Route exact path='/homeadmin' Component={HomeAdmin}/>
           <Route exact path='/abm/abmchoferes' Component={ABMChoferes}/>
           <Route exact path='/abm/abmchoferes/CreateChofer' Component={CreateChofer}/>
