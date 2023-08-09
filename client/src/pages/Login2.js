@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import * as AiIcons from "react-icons/ai";
-import * as RiIcons from "react-icons/ri";
 import '../css/Login2.css'
 
 export default function Login2() {
@@ -53,30 +51,31 @@ export default function Login2() {
 
   return (
     <div class="login-box">
+      <label className="texto-error">{msgError}</label>
       <h2>Iniciar sesión</h2>
       <form action="" id="login" method="post" onSubmit={handleSubmit}>
         <div class="user-box">
           <input
-        type="text"
-        name="usuario"
-        id="usuario"
-        required=""
-        placeholder='Ingrese su usuario'
-        value={usuario}
-        onChange={e => setUsuario(e.target.value)}
-        />
+            type="text"
+            name="usuario"
+            id="usuario"
+            required=""
+            placeholder='Ingrese su usuario'
+            value={usuario}
+            onChange={e => setUsuario(e.target.value)}
+            />
           <label for="usuario">Usuario</label>
         </div>
         <div class="user-box">
           <input
-        type="password"
-        name="contrasenia"
-        id="contrasenia"
-        placeholder='*********'
-        required=""
-        value={contrasenia}
-        onChange={e => setContrasenia(e.target.value)}
-        />
+            type="password"
+            name="contrasenia"
+            id="contrasenia"
+            placeholder='*********'
+            required=""
+            value={contrasenia}
+            onChange={e => setContrasenia(e.target.value)}
+            />
           <label for="contrasenia">Contraseña</label>
         </div>
         <button type="submit" href="#">
