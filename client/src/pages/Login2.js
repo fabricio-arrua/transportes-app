@@ -20,16 +20,17 @@ export default function Login2() {
     // Handle validations
     axios
       .post("http://localhost:4000/api/empleados/logueo", { usuario, contrasenia })
-      .then(response => {    
-        if (response.data.length > 0) {
-          cookies.set('usuario', response.data[0].usuario, {path: '/'});
-          cookies.set('nombre_completo', response.data[0].nombre_completo, {path: '/'});
-          cookies.set('tipo', response.data[0].Tipo, {path: '/'})
+      .then(response => {
+        if (response.data.message == 'Datos ingresados correctos') {
+          cookies.set('usuario', response.data.usuario.usuarioA, {path: '/'});
+          cookies.set('nombre_completo', response.data.usuario.nombre_completo, {path: '/'});
+          cookies.set('tipo', response.data.usuario.Tipo, {path: '/'})
+          cookies.set('token', response.data.token, {path: '/'})
           
-          if (response.data[0].Tipo === 'A'){
+          if (response.data.usuario.Tipo === 'A'){
             setNavAdmin(!navAdmin);
           }
-          else if(response.data[0].Tipo === 'T'){
+          else if(response.data.usuario.Tipo === 'T'){
             setNavTec(!navTec);
           }
         } else {
