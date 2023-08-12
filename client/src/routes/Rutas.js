@@ -31,16 +31,20 @@ import RegistrarMantenimiento from '../pages/tecnico/RegistrarMantenimiento';
 import SolicitudDeMateriales from '../pages/tecnico/SolicitudDeMateriales';
 
 //components
-import Navbar from '../components/Navbar';
+import NavbarAdmin from '../components/Navbar';
+import NavbarTecnico from '../components/NavbarTecnico';
 import MaybeShowNavBar from '../components/MaybeShowNavBar';
-
+import MaybeShowNavBarTecnico from '../components/MaybeShowNavBarTecnico';
 
 function Rutas() {
   return (
     <BrowserRouter>
       <MaybeShowNavBar>
-        <Navbar />  
+        <NavbarAdmin />
       </MaybeShowNavBar>
+      <MaybeShowNavBarTecnico>
+        <NavbarTecnico />
+      </MaybeShowNavBarTecnico>
       <div className="main">
         <Routes>
           <Route exact path='/' Component={Login2}/>

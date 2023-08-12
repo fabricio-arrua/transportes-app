@@ -9,7 +9,9 @@ const MaybeShowNavBar = ({children}) => {
 
   useEffect(() => {
     console.log('this is location: ', location)
-    if(location.pathname === '/') {
+    if(location.pathname === '/' || location.pathname === '/hometecnico'
+    || location.pathname === '/listadocamionesreparacion' || location.pathname === '/registrarmantenimiento'
+    || location.pathname === '/solicitudmateriales' || location.pathname === '/logout') {
       setShowNavBar(false)
     } else {
       setShowNavBar(true)

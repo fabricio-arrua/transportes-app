@@ -15,7 +15,7 @@ export const SidebarData = [
     },
     {
       title: 'Administración',
-      path: '/abm',
+      /*path: '/abm',*/
       icon: <BsIcons.BsClipboard2DataFill />,
       iconClosed: <RiIcons.RiArrowDownSFill />,
       iconOpened: <RiIcons.RiArrowUpSFill />,
@@ -64,7 +64,7 @@ export const SidebarData = [
     },
     {
       title: 'Reportes',
-      path: '/list',
+      /*path: '/list',*/
       icon: <BsIcons.BsList />,
       iconClosed: <RiIcons.RiArrowDownSFill />,
       iconOpened: <RiIcons.RiArrowUpSFill />,
