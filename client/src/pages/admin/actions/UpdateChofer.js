@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../../../css/misBtns.css'
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 export default function UpdateChofer() {
   const [usuario, setUsuario] = useState('');
@@ -24,7 +27,10 @@ export default function UpdateChofer() {
       usuario,
 			nombre,
 			licencia,
-			telefono
+			telefono,
+      headers: {
+        Authorization: cookies.get('token'), 
+      }
     }).then(() => {
       navigate('/abm/abmchoferes')
     })

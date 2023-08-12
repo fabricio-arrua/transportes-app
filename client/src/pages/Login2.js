@@ -22,7 +22,7 @@ export default function Login2() {
       .post("http://localhost:4000/api/empleados/logueo", { usuario, contrasenia })
       .then(response => {
         if (response.data.message == 'Datos ingresados correctos') {
-          cookies.set('usuario', response.data.usuario.usuarioA, {path: '/'});
+          cookies.set('usuario', response.data.usuario.usuario, {path: '/'});
           cookies.set('nombre_completo', response.data.usuario.nombre_completo, {path: '/'});
           cookies.set('tipo', response.data.usuario.Tipo, {path: '/'})
           cookies.set('token', response.data.token, {path: '/'})

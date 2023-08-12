@@ -3,6 +3,9 @@ import { Table, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../../css/misBtns.css';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 export default function ABMChoferes() {
 
@@ -10,7 +13,10 @@ export default function ABMChoferes() {
   const [usuario, setUsuario] = useState('');
   
   useEffect(() => {
-    axios.get(`http://localhost:4000/api/empleados/listadoChofer`)
+    axios.get(`http://localhost:4000/api/empleados/listadoChofer`, {
+      headers: {
+        Authorization: cookies.get('token'), 
+      }})
       .then((response) => {
           setAPIData(response.data.listado);
       })
