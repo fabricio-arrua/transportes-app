@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const MaybeShowNavBar = ({children}) => {
   const location = useLocation();
@@ -8,10 +11,8 @@ const MaybeShowNavBar = ({children}) => {
 
 
   useEffect(() => {
-    console.log('this is location: ', location)
-    if(location.pathname === '/' || location.pathname === '/hometecnico'
-    || location.pathname === '/listadocamionesreparacion' || location.pathname === '/registrarmantenimiento'
-    || location.pathname === '/solicitudmateriales' || location.pathname === '/logout') {
+
+    if(cookies.get('tipo') === 'T') {
       setShowNavBar(false)
     } else {
       setShowNavBar(true)

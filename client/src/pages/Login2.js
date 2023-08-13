@@ -21,7 +21,7 @@ export default function Login2() {
     axios
       .post("http://localhost:4000/api/empleados/logueo", { usuario, contrasenia })
       .then(response => {
-        if (response.data.message == 'Datos ingresados correctos') {
+        if (response.data.message === 'Datos ingresados correctos') {
           cookies.set('usuario', response.data.usuario.usuario, {path: '/'});
           cookies.set('nombre_completo', response.data.usuario.nombre_completo, {path: '/'});
           cookies.set('tipo', response.data.usuario.Tipo, {path: '/'})
@@ -51,11 +51,11 @@ export default function Login2() {
   });
 
   return (
-    <div class="login-box">
+    <div className="login-box">
       <label className="texto-error">{msgError}</label>
       <h2>Iniciar sesión</h2>
       <form action="" id="login" method="post" onSubmit={handleSubmit}>
-        <div class="user-box">
+        <div className="user-box">
           <input
             type="text"
             name="usuario"
@@ -67,7 +67,7 @@ export default function Login2() {
             />
           <label for="usuario">Usuario</label>
         </div>
-        <div class="user-box">
+        <div className="user-box">
           <input
             type="password"
             name="contrasenia"

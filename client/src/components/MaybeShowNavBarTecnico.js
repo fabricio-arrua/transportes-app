@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const MaybeShowNavBarTecnico = ({children}) => {
   const location = useLocation();
@@ -8,16 +11,7 @@ const MaybeShowNavBarTecnico = ({children}) => {
 
 
   useEffect(() => {
-    console.log('this is location: ', location)
-    if(location.pathname === '/' || location.pathname === '/homeadmin'
-    || location.pathname === '/abm/abmchoferes' || location.pathname === '/abm/abmchoferes/CreateChofer'
-    || location.pathname === '/abm/abmchoferes/UpdateChofer' || location.pathname === '/abm/abmchoferes/modPassword'
-    || location.pathname === '/abm/abmtecnicos' || location.pathname === '/abm/abmadmins'
-    || location.pathname === '/abm/abmcamiones' || location.pathname === '/abm/abmclientes'
-    || location.pathname === '/abm/abmestadocamion' || location.pathname === '/abm/abmtipocamion'
-    || location.pathname === '/abm/abmtransportes' || location.pathname === '/listadochoferessintransporte'
-    || location.pathname === '/listadoclientes' || location.pathname === '/listadogastos'
-    || location.pathname === '/listadotransportesnorealizados') {
+    if(cookies.get('tipo') === 'A') {
       setShowNavBar(false)
     } else {
       setShowNavBar(true)

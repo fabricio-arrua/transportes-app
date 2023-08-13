@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../../../css/misBtns.css'
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 export default function CreateChofer() {
   const [usuario, setUsuario] = useState('');
@@ -14,45 +17,56 @@ export default function CreateChofer() {
   const navigate = useNavigate();
 
   const postData = () => {
+
+
 		axios.post(`http://localhost:4000/api/empleados/altaChofer`, {
 			usuario,
 			contrasenia,
 			nombre,
 			licencia,
 			telefono
-		}).then(() => {
+		},
+    {
+      headers: {
+        Authorization: cookies.get('token'), 
+      },
+    }
+    ).then(() => {
       navigate('/abm/abmchoferes')
     })
   }
 
   return (
-    <div>
-      <Link to='/abm/abmchoferes'>
-        <button className='Btn'>Volver</button>
+    <div className="App">
+      <Link to='/abm/abmchoferes' className="Btn">
+        Volver
       </Link>
-      <Form className="create-form">
-        <Form.Field>
-          <label>Usuario</label>
-          <input placeholder='Usuario' onChange={(e) => setUsuario(e.target.value)}/>
-        </Form.Field>
-        <Form.Field>
-          <label>Contraseña</label>
-          <input type='password' placeholder='Contraseña' onChange={(e) => setContrasenia(e.target.value)}/>
-        </Form.Field>
-        <Form.Field>
-          <label>Nombre completo</label>
-          <input placeholder='Nombre completo' onChange={(e) => setNombre(e.target.value)}/>
-        </Form.Field>
-        <Form.Field>
-          <label>Licencia</label>
-          <input placeholder='Licencia' onChange={(e) => setLicencia(e.target.value)}/>
-        </Form.Field>
-        <Form.Field>
-          <label>Telefono</label>
-          <input placeholder='Telefono' onChange={(e) => setTelefono(e.target.value)}/>
-        </Form.Field>
-        <Button onClick={postData} type='submit'>Crear</Button>
-      </Form>
+      <div className="form-container">
+        <h2 className="form-title">Registro de choferes</h2>
+        <Form className="create-form">
+          <Form.Field required>
+            <label>Usuario</label>
+            <input placeholder='Usuario' onChange={(e) => setUsuario(e.target.value)}/>
+          </Form.Field>
+          <Form.Field required>
+            <label>Contraseña</label>
+            <input type='password' placeholder='Contraseña' onChange={(e) => setContrasenia(e.target.value)}/>
+          </Form.Field>
+          <Form.Field required>
+            <label>Nombre completo</label>
+            <input placeholder='Nombre completo' onChange={(e) => setNombre(e.target.value)}/>
+          </Form.Field>
+          <Form.Field required>
+            <label>Licencia</label>
+            <input placeholder='Licencia' onChange={(e) => setLicencia(e.target.value)}/>
+          </Form.Field>
+          <Form.Field required>
+            <label>Telefono</label>
+            <input placeholder='Telefono' onChange={(e) => setTelefono(e.target.value)}/>
+          </Form.Field>
+          <Button className="submit-button" onClick={postData} type='submit'>Crear</Button>
+        </Form>
+      </div>
     </div>
   )
 }
