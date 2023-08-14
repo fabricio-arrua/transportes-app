@@ -11,7 +11,7 @@ const MaybeShowNavBarTecnico = ({children}) => {
 
 
   useEffect(() => {
-    if(cookies.get('tipo') === 'A') {
+    if(location.pathname === '/' || location.pathname === '/logout' || cookies.get('tipo') === 'A') {
       setShowNavBar(false)
     } else {
       setShowNavBar(true)

@@ -13,6 +13,10 @@ export default function ABMChoferes() {
   const [usuario, setUsuario] = useState('');
   
   useEffect(() => {
+    if(cookies.get('tipo') !== 'A'){
+      window.location.href='/';
+    }
+
     axios.get(`http://localhost:4000/api/empleados/listadoChofer`, {
       headers: {
         Authorization: cookies.get('token'), 

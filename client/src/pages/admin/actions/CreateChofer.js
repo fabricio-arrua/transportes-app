@@ -1,5 +1,5 @@
 import { Button, Form } from 'semantic-ui-react'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../../../css/misBtns.css'
@@ -16,9 +16,13 @@ export default function CreateChofer() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if(cookies.get('tipo') !== 'A'){
+      window.location.href='/';
+    }
+  }, [])
+
   const postData = () => {
-
-
 		axios.post(`http://localhost:4000/api/empleados/altaChofer`, {
 			usuario,
 			contrasenia,

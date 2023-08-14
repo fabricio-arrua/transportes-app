@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../../../css/misBtns.css'
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 export default function ModPassword() {
   const [usuario, setUsuario] = useState('');
@@ -13,6 +16,10 @@ export default function ModPassword() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if(cookies.get('tipo') !== 'A'){
+      window.location.href='/';
+    }
+
     setUsuario(localStorage.getItem('Usuario'))
   }, []);
 

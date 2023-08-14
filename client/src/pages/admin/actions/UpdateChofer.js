@@ -16,6 +16,10 @@ export default function UpdateChofer() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if(cookies.get('tipo') !== 'A'){
+      window.location.href='/';
+    }
+    
     setUsuario(localStorage.getItem('Usuario'))
     setLicencia(localStorage.getItem('Licencia'));
     setTelefono(localStorage.getItem('Telefono'));

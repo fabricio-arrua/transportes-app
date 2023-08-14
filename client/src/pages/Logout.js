@@ -9,6 +9,7 @@ export default class Logout extends Component {
     cookies.remove('usuario', {path: '/'});
     cookies.remove('nombre_completo', {path: '/'});
     cookies.remove('tipo', {path: '/'});
+    cookies.remove('token', {path: '/'});
 
     window.location.href='./';
   }
