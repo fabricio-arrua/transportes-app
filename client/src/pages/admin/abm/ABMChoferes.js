@@ -41,14 +41,22 @@ export default function ABMChoferes() {
 
     axios.post(`http://localhost:4000/api/empleados/bajaChofer/`, {
       usuario
-    })
-    .then(() => {
+    },
+    {
+      headers: {
+        Authorization: cookies.get('token'), 
+      },
+    }
+    ).then(() => {
       getData();
     })
   }
 
   const getData = () => {
-    axios.get(`http://localhost:4000/api/empleados/listadoChofer`)
+    axios.get(`http://localhost:4000/api/empleados/listadoChofer`, {
+      headers: {
+        Authorization: cookies.get('token'), 
+      }})
       .then((getData) => {
         setAPIData(getData.data.listado);
       })
