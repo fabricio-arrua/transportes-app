@@ -28,7 +28,13 @@ export default function ModPassword() {
       axios.post(`http://localhost:4000/api/empleados/ModificarContrasenia`, {
         usuario,
         contrasenia
-      }).then(() => {
+      },
+      {
+        headers: {
+          Authorization: cookies.get('token'), 
+        },
+      }
+      ).then(() => {
         navigate('/abm/abmchoferes')
       }).catch(error => {
         console.log(error);

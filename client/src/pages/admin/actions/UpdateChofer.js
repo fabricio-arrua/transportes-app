@@ -31,11 +31,14 @@ export default function UpdateChofer() {
       usuario,
 			nombre,
 			licencia,
-			telefono,
+			telefono
+    },
+    {
       headers: {
         Authorization: cookies.get('token'), 
-      }
-    }).then(() => {
+      },
+    }
+    ).then(() => {
       navigate('/abm/abmchoferes')
     })
   }
