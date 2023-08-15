@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../../css/misBtns.css';
+import ExcelExport from '../actions/ExcelExport';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
@@ -32,8 +33,9 @@ export default function ListadoChoferesSinTransporte() {
   return (
     <div>
       <Link to='/listExport'>
-        <Button className='Btn'>Exportar</Button>
+        <button className='Btn'>Exportar</button>
       </Link>
+      <ExcelExport excelData={APIData} fileName={"Listado de choferes sin transporte"} />
       <Table singleLine>
         <Table.Header>
           <Table.Row>
