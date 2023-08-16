@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'semantic-ui-react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import '../../../css/misBtns.css';
 import ExcelExport from '../actions/ExcelExport';
 import Cookies from 'universal-cookie';
@@ -22,7 +21,6 @@ export default function ListadoChoferesSinTransporte() {
         Authorization: cookies.get('token'), 
       }})
       .then((response) => {
-        console.log(response.data);
         setAPIData(response.data.listado);
       })
       .catch(error => {
@@ -32,9 +30,6 @@ export default function ListadoChoferesSinTransporte() {
 
   return (
     <div>
-      <Link to='/listExport'>
-        <button className='Btn'>Exportar</button>
-      </Link>
       <ExcelExport excelData={APIData} fileName={"Listado de choferes sin transporte"} />
       <Table singleLine>
         <Table.Header>
