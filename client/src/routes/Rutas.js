@@ -10,7 +10,6 @@ import Logout from '../pages/Logout';
 import HomeAdmin from '../pages/admin/HomeAdmin';
 import ABMChoferes from '../pages/admin/abm/ABMChoferes';
 import ABMTecnicos from '../pages/admin/abm/ABMTecnicos';
-import ABMAdmins from '../pages/admin/abm/ABMAdmins';
 import ABMCamiones from '../pages/admin/abm/ABMCamiones';
 import ABMClientes from '../pages/admin/abm/ABMClientes';
 import ABMEstadoCamion from '../pages/admin/abm/ABMEstadoCamion';
@@ -55,7 +54,6 @@ function Rutas() {
           <Route exact path='/abm/abmchoferes/UpdateChofer' Component={UpdateChofer}/>
           <Route exact path='/abm/abmchoferes/modPassword' Component={ModPassword}/>
           <Route exact path='/abm/abmtecnicos' Component={ABMTecnicos}/>
-          <Route exact path='/abm/abmadmins' Component={ABMAdmins}/>
           <Route exact path='/abm/abmcamiones' Component={ABMCamiones}/>
           <Route exact path='/abm/abmclientes' Component={ABMClientes}/>
           <Route exact path='/abm/abmestadocamion' Component={ABMEstadoCamion}/>

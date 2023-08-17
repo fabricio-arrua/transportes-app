@@ -21,11 +21,6 @@ export const SidebarData = [
       iconOpened: <RiIcons.RiArrowUpSFill />,
       subNav: [
         {
-        title: 'Admins',
-        path: '/abm/abmadmins',
-        icon: <RiIcons.RiAdminLine />
-        },
-        {
           title: 'Camiones',
           path: '/abm/abmcamiones',
           icon: <BsIcons.BsTruck />,
