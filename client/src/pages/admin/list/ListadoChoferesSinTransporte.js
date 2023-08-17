@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../../css/misBtns.css';
 import ExcelExport from '../actions/ExcelExport';
@@ -28,6 +29,11 @@ export default function ListadoChoferesSinTransporte() {
       });
   }, [])
 
+  const setData = (data) => {
+    let { usuarioC } = data;
+    localStorage.setItem('Usuario', usuarioC);
+  }
+
   return (
     <div>
       <ExcelExport excelData={APIData} fileName={"Listado de choferes sin transporte"} />
@@ -38,6 +44,7 @@ export default function ListadoChoferesSinTransporte() {
             <Table.HeaderCell>Licencia</Table.HeaderCell>
             <Table.HeaderCell>Telefono</Table.HeaderCell>
             <Table.HeaderCell>Nombre completo</Table.HeaderCell>
+            <Table.HeaderCell>Asignar transporte</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -49,6 +56,11 @@ export default function ListadoChoferesSinTransporte() {
                   <Table.Cell>{data.nro_licencia}</Table.Cell>
                   <Table.Cell>{data.telefono}</Table.Cell>
                   <Table.Cell>{data.nombre_completo}</Table.Cell>
+                  <Link to='/asignartransporte'>
+                    <Table.Cell> 
+                      <Button onClick={() => setData(data)}>Asignar</Button>
+                    </Table.Cell>
+                  </Link>
                 </Table.Row>
           )})}
         </Table.Body>
