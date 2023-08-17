@@ -21,9 +21,9 @@ import ListadoDeClientes from '../pages/admin/list/ListadoDeClientes';
 import ListadoDeGastos from '../pages/admin/list/ListadoDeGastos';
 import ListadoTransportesNoRealizados from '../pages/admin/list/ListadoTransportesNoRealizados';
 //pages-admin/actions
-import CreateChofer from '../pages/admin/actions/CreateChofer'
-import UpdateChofer from '../pages/admin/actions/UpdateChofer'
-import ModPassword from '../pages/admin/actions/ModPassword'
+import CreateChofer from '../pages/admin/actions/create/CreateChofer'
+import UpdateChofer from '../pages/admin/actions/update/UpdateChofer'
+import ModPassword from '../pages/admin/actions/update/ModPassword'
 import AsignarTransporte from '../pages/admin/actions/AsignarTransporte'
 //pages-tecnico
 import HomeTecnico from '../pages/tecnico/HomeTecnico';

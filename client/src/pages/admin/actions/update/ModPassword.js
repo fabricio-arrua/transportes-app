@@ -2,7 +2,7 @@ import { Button, Form } from 'semantic-ui-react'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import '../../../css/misBtns.css'
+import '../../../../css/misBtns.css'
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
