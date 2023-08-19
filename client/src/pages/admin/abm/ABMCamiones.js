@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../../css/misBtns.css';
 import Cookies from 'universal-cookie';
+import * as AiIcons from 'react-icons/ai';
+import * as FaIcons from 'react-icons/fa';
 
 const cookies = new Cookies();
 
@@ -22,8 +24,7 @@ export default function ABMCamiones() {
         Authorization: cookies.get('token'), 
       }})
       .then((response) => {
-          console.log(response.data.listado);
-          setAPIData(response.data.listado);
+        setAPIData(response.data.listado);
       })
       .catch(error => {
         console.log(error);
@@ -45,15 +46,15 @@ export default function ABMCamiones() {
     localStorage.setItem('Matricula', matricula);
     setMatricula(localStorage.getItem('Matricula'))
 
-    axios.post(`http://localhost:4000/api/camiones/eliminarCamion/`, {
+    axios.post(`http://localhost:4000/api/camiones/eliminarCamion`, {
       matric
     },
     {
       headers: {
         Authorization: cookies.get('token'), 
       },
-    }
-    ).then(() => {
+    })
+    .then(() => {
       getData();
     })
   }
@@ -102,11 +103,11 @@ export default function ABMCamiones() {
                   <Table.Cell>{data.id_tipo}</Table.Cell>
                   <Link to='/abm/abmcamiones/UpdateCamion'>
                     <Table.Cell> 
-                      <Button onClick={() => setData(data)}>Modificar</Button>
+                      <Button onClick={() => setData(data)}><AiIcons.AiOutlineEdit /></Button>
                     </Table.Cell>
                   </Link>
                   <Table.Cell>
-                    <Button onClick={() => {onDelete(data);}}>Eliminar</Button>
+                    <Button onClick={() => {onDelete(data);}}><FaIcons.FaTrash /></Button>
                   </Table.Cell>
                 </Table.Row>
           )})}

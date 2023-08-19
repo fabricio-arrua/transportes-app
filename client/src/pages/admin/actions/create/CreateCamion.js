@@ -57,23 +57,23 @@ export default function CreateCamion() {
           </Form.Field>
           <Form.Field required>
             <label>Año</label>
-            <input placeholder='Año' onChange={(e) => setAnio(e.target.value)}/>
+            <input type='number' placeholder='Año' onChange={(e) => setAnio(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
             <label>Marca</label>
-            <input placeholder='Marca' onChange={(e) => setMarca(e.target.value)}/>
+            <input type='text' placeholder='Marca' onChange={(e) => setMarca(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
             <label>Kilometros</label>
-            <input placeholder='Kilometros' onChange={(e) => setKilometros(e.target.value)}/>
+            <input type='number' placeholder='Kilometros' onChange={(e) => setKilometros(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
             <label>Estado</label>
-            <input placeholder='Estado' onChange={(e) => setEstado(e.target.value)}/>
+            <input type='text' placeholder='Estado' onChange={(e) => setEstado(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
             <label>Tipo</label>
-            <input placeholder='Tipo' onChange={(e) => setTipo(e.target.value)}/>
+            <input type='text' placeholder='Tipo' onChange={(e) => setTipo(e.target.value)}/>
           </Form.Field>
           <Button className="submit-button" onClick={postData} type='submit'>Crear</Button>
         </Form>

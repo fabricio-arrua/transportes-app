@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../../css/misBtns.css';
 import Cookies from 'universal-cookie';
+import * as AiIcons from 'react-icons/ai';
+import * as FaIcons from 'react-icons/fa';
 
 const cookies = new Cookies();
 
@@ -89,11 +91,11 @@ export default function ABMChoferes() {
                   <Table.Cell>{data.nombre_completo}</Table.Cell>
                   <Link to='/abm/abmchoferes/UpdateChofer'>
                     <Table.Cell> 
-                      <Button onClick={() => setData(data)}>Modificar</Button>
+                      <Button onClick={() => setData(data)}><AiIcons.AiOutlineEdit /></Button>
                     </Table.Cell>
                   </Link>
                   <Table.Cell>
-                    <Button onClick={() => {onDelete(data);}}>Eliminar</Button>
+                    <Button onClick={() => {onDelete(data);}}><FaIcons.FaTrash /></Button>
                   </Table.Cell>
                 </Table.Row>
           )})}
