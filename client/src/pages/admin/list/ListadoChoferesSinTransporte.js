@@ -5,6 +5,7 @@ import axios from 'axios';
 import '../../../css/misBtns.css';
 import ExcelExport from '../actions/ExcelExport';
 import Cookies from 'universal-cookie';
+import * as BsIcons from 'react-icons/bs';
 
 const cookies = new Cookies();
 
@@ -58,7 +59,7 @@ export default function ListadoChoferesSinTransporte() {
                   <Table.Cell>{data.nombre_completo}</Table.Cell>
                   <Link to='/asignartransporte'>
                     <Table.Cell> 
-                      <Button onClick={() => setData(data)}>Asignar</Button>
+                      <Button onClick={() => setData(data)}><BsIcons.BsFillPlusCircleFill /></Button>
                     </Table.Cell>
                   </Link>
                 </Table.Row>
