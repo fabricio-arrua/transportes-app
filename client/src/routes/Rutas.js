@@ -20,8 +20,12 @@ import ListadoDeClientes from '../pages/admin/list/ListadoDeClientes';
 import ListadoDeGastos from '../pages/admin/list/ListadoDeGastos';
 import ListadoTransportesNoRealizados from '../pages/admin/list/ListadoTransportesNoRealizados';
 //pages-admin/actions
+//create
 import CreateChofer from '../pages/admin/actions/create/CreateChofer'
+import CreateCamion from '../pages/admin/actions/create/CreateCamion'
+//update
 import UpdateChofer from '../pages/admin/actions/update/UpdateChofer'
+import UpdateCamion from '../pages/admin/actions/update/UpdateCamion'
 import ModPassword from '../pages/admin/actions/update/ModPassword'
 import AsignarTransporte from '../pages/admin/actions/AsignarTransporte'
 //pages-tecnico
@@ -55,6 +59,8 @@ function Rutas() {
           <Route exact path='/abm/abmchoferes/modPassword' Component={ModPassword}/>
           <Route exact path='/abm/abmtecnicos' Component={ABMTecnicos}/>
           <Route exact path='/abm/abmcamiones' Component={ABMCamiones}/>
+          <Route exact path='/abm/abmcamiones/CreateCamion' Component={CreateCamion}/>
+          <Route exact path='/abm/abmcamiones/UpdateCamion' Component={UpdateCamion}/>
           <Route exact path='/abm/abmclientes' Component={ABMClientes}/>
           <Route exact path='/abm/abmestadocamion' Component={ABMEstadoCamion}/>
           <Route exact path='/abm/abmtipocamion' Component={ABMTipoCamion}/>
