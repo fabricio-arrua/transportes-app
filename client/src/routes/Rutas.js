@@ -23,9 +23,11 @@ import ListadoTransportesNoRealizados from '../pages/admin/list/ListadoTransport
 //create
 import CreateChofer from '../pages/admin/actions/create/CreateChofer'
 import CreateCamion from '../pages/admin/actions/create/CreateCamion'
+import CreateCliente from '../pages/admin/actions/create/CreateCliente'
 //update
 import UpdateChofer from '../pages/admin/actions/update/UpdateChofer'
 import UpdateCamion from '../pages/admin/actions/update/UpdateCamion'
+import UpdateCliente from '../pages/admin/actions/update/UpdateCliente'
 import ModPassword from '../pages/admin/actions/update/ModPassword'
 import AsignarTransporte from '../pages/admin/actions/AsignarTransporte'
 //pages-tecnico
@@ -62,6 +64,8 @@ function Rutas() {
           <Route exact path='/abm/abmcamiones/CreateCamion' Component={CreateCamion}/>
           <Route exact path='/abm/abmcamiones/UpdateCamion' Component={UpdateCamion}/>
           <Route exact path='/abm/abmclientes' Component={ABMClientes}/>
+          <Route exact path='/abm/abmclientes/CreateCliente' Component={CreateCliente}/>
+          <Route exact path='/abm/abmclientes/UpdateCliente' Component={UpdateCliente}/>          
           <Route exact path='/abm/abmestadocamion' Component={ABMEstadoCamion}/>
           <Route exact path='/abm/abmtipocamion' Component={ABMTipoCamion}/>
           <Route exact path='/abm/abmtransportes' Component={ABMTransportes}/>

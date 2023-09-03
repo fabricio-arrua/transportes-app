@@ -53,19 +53,19 @@ export default function CreateCamion() {
         <Form className="create-form">
           <Form.Field required>
             <label>Matricula</label>
-            <input placeholder='Matricula' onChange={(e) => setMatricula(e.target.value)}/>
+            <input placeholder='ej: ABC1234' onChange={(e) => setMatricula(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
             <label>Año</label>
-            <input type='number' placeholder='Año' onChange={(e) => setAnio(e.target.value)}/>
+            <input type='number' placeholder='2023' onChange={(e) => setAnio(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
             <label>Marca</label>
-            <input type='text' placeholder='Marca' onChange={(e) => setMarca(e.target.value)}/>
+            <input type='text' placeholder='Ingrese una marca' onChange={(e) => setMarca(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
             <label>Kilometros</label>
-            <input type='number' placeholder='Kilometros' onChange={(e) => setKilometros(e.target.value)}/>
+            <input type='number' placeholder='Cantidad de kilometros' onChange={(e) => setKilometros(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
             <label>Estado</label>
