@@ -25,7 +25,7 @@ export default function CreateCliente() {
   const postData = () => {
 		axios.post(`http://localhost:4000/api/clientes/altaCliente`, {
 			documento,
-			nombre,
+			nombreCompleto:nombre,
 			direccion,
 			telefono
 		},

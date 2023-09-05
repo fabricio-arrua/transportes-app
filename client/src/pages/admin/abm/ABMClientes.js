@@ -42,7 +42,7 @@ export default function ABMClientes() {
     setDoc(localStorage.getItem('Documento'))
 
     axios.post(`http://localhost:4000/api/clientes/eliminarCliente/`, {
-      doc
+      documento:doc
     },
     {
       headers: {

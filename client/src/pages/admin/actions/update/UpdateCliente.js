@@ -29,7 +29,7 @@ export default function UpdateCliente() {
   const updateAPIData = () => {
     axios.post(`http://localhost:4000/api/clientes/modificarCliente`, {
       documento,
-			nombre,
+			nombreCompleto:nombre,
 			direccion,
       telefono
     },
