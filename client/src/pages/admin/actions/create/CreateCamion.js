@@ -13,8 +13,8 @@ export default function CreateCamion() {
   const [anio, setAnio] = useState('');
   const [marca, setMarca] = useState('');
   const [kilometros, setKilometros] = useState('');
-  const [id_estado, setEstado] = useState('');
-  const [id_tipo, setTipo] = useState('');
+  const [idEstado, setEstado] = useState('');
+  const [idTipoCamion, setTipo] = useState('');
 
   const navigate = useNavigate();
 
@@ -30,8 +30,8 @@ export default function CreateCamion() {
 			anio,
 			marca,
 			kilometros,
-			id_estado,
-      id_tipo
+			idEstado,
+      idTipoCamion
 		},
     {
       headers: {

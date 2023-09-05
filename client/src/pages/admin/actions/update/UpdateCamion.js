@@ -12,8 +12,8 @@ export default function UpdateCamion() {
   const [anio, setAnio] = useState('');
   const [marca, setMarca] = useState('');
   const [kilometros, setKilometros] = useState('');
-  const [id_estado, setEstado] = useState('');
-  const [id_tipo, setTipo] = useState('');
+  const [idEstado, setEstado] = useState('');
+  const [idTipoCamion, setTipo] = useState('');
 
   const navigate = useNavigate();
 
@@ -36,8 +36,8 @@ export default function UpdateCamion() {
 			anio,
 			marca,
       kilometros,
-      id_estado,
-			id_tipo
+      idEstado,
+			idTipoCamion
     },
     {
       headers: {
@@ -74,11 +74,11 @@ export default function UpdateCamion() {
         </Form.Field>
         <Form.Field>
           <label>Estado</label>
-          <input placeholder='Estado' value={id_estado} onChange={(e) => setEstado(e.target.value)}/>
+          <input placeholder='Estado' value={idEstado} onChange={(e) => setEstado(e.target.value)}/>
         </Form.Field>
         <Form.Field>
           <label>Tipo</label>
-          <input placeholder='Tipo' value={id_tipo} onChange={(e) => setTipo(e.target.value)}/>
+          <input placeholder='Tipo' value={idTipoCamion} onChange={(e) => setTipo(e.target.value)}/>
         </Form.Field>
         <Button type='submit' onClick={updateAPIData}>Modificar</Button>
       </Form>

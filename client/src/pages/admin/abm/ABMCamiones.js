@@ -47,7 +47,7 @@ export default function ABMCamiones() {
     setMatricula(localStorage.getItem('Matricula'))
 
     axios.post(`http://localhost:4000/api/camiones/eliminarCamion`, {
-      matric
+      matricula:matric
     },
     {
       headers: {
