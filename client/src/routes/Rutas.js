@@ -25,11 +25,13 @@ import CreateChofer from '../pages/admin/actions/create/CreateChofer'
 import CreateCamion from '../pages/admin/actions/create/CreateCamion'
 import CreateCliente from '../pages/admin/actions/create/CreateCliente'
 import CreateEstado from '../pages/admin/actions/create/CreateEstado'
+import CreateTipo from '../pages/admin/actions/create/CreateTipo'
 //update
 import UpdateChofer from '../pages/admin/actions/update/UpdateChofer'
 import UpdateCamion from '../pages/admin/actions/update/UpdateCamion'
 import UpdateCliente from '../pages/admin/actions/update/UpdateCliente'
 import UpdateEstado from '../pages/admin/actions/update/UpdateEstado'
+import UpdateTipo from '../pages/admin/actions/update/UpdateTipo'
 import ModPassword from '../pages/admin/actions/update/ModPassword'
 import AsignarTransporte from '../pages/admin/actions/AsignarTransporte'
 //pages-tecnico
@@ -70,8 +72,10 @@ function Rutas() {
           <Route exact path='/abm/abmclientes/UpdateCliente' Component={UpdateCliente}/>          
           <Route exact path='/abm/abmestadocamion' Component={ABMEstadoCamion}/>
           <Route exact path='/abm/abmestadocamion/CreateEstado' Component={CreateEstado}/>
-          <Route exact path='/abm/abmestadocamion/UpdateEstado' Component={UpdateEstado}/> 
+          <Route exact path='/abm/abmestadocamion/UpdateEstado' Component={UpdateEstado}/>
           <Route exact path='/abm/abmtipocamion' Component={ABMTipoCamion}/>
+          <Route exact path='/abm/abmtipocamion/CreateTipo' Component={CreateTipo}/>
+          <Route exact path='/abm/abmtipocamion/UpdateTipo' Component={UpdateTipo}/>
           <Route exact path='/abm/abmtransportes' Component={ABMTransportes}/>
           <Route exact path='/listadochoferessintransporte' Component={ListadoChoferesSinTransporte}/>
           <Route exact path='/asignartransporte' Component={AsignarTransporte}/>

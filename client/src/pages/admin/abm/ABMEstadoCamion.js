@@ -12,7 +12,7 @@ const cookies = new Cookies();
 export default function ABMEstadoCamion() {
 
   const [APIData, setAPIData] = useState([]);
-  const [id, setId] = useState('');
+  const [idEstado, setId] = useState('');
   
   useEffect(() => {
     if(cookies.get('tipo') !== 'A'){
@@ -40,7 +40,7 @@ export default function ABMEstadoCamion() {
     setId(localStorage.getItem('Id'))
 
     axios.post(`http://localhost:4000/api/estadoCamiones/eliminarEstadoCamion/`, {
-      id_estado:id
+      idEstado
     },
     {
       headers: {
