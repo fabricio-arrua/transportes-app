@@ -15,6 +15,7 @@ export default function CreateCamion() {
   const [kilometros, setKilometros] = useState('');
   const [idEstado, setEstado] = useState('');
   const [idTipoCamion, setTipo] = useState('');
+  const [options, setOptions] = useState([]);
 
   const navigate = useNavigate();
 
@@ -22,6 +23,17 @@ export default function CreateCamion() {
     if(cookies.get('tipo') !== 'A'){
       window.location.href='/';
     }
+
+    axios.get(`http://localhost:4000/api/estadoCamiones/listadoEstadoCamion`, {
+      headers: {
+        Authorization: cookies.get('token'), 
+      }})
+    .then((response) => {
+      setOptions(response.data.listado);
+    })
+    .catch((error) => {
+      console.error('Error fetching data from API:', error);
+    });
   }, [])
 
   const postData = () => {
@@ -69,7 +81,19 @@ export default function CreateCamion() {
           </Form.Field>
           <Form.Field required>
             <label>Estado</label>
-            <input type='text' placeholder='Estado' onChange={(e) => setEstado(e.target.value)}/>
+            <div className="dropdown">
+              <select
+                value={idEstado}
+                onChange={(e) => setEstado(e.target.value)}
+              >
+                <option value="">Seleccione un estado</option>
+                {options.map((option) => (
+                  <option key={option.id_estado} value={option.id_estado}>
+                    {option.descripcion}
+                  </option>
+                ))}
+              </select>
+            </div>
           </Form.Field>
           <Form.Field required>
             <label>Tipo</label>
