@@ -15,7 +15,8 @@ export default function CreateCamion() {
   const [kilometros, setKilometros] = useState('');
   const [idEstado, setEstado] = useState('');
   const [idTipoCamion, setTipo] = useState('');
-  const [options, setOptions] = useState([]);
+  const [optEstado, setOptEstado] = useState([]);
+  const [optTipo, setOptTipo] = useState([]);
 
   const navigate = useNavigate();
 
@@ -29,10 +30,21 @@ export default function CreateCamion() {
         Authorization: cookies.get('token'), 
       }})
     .then((response) => {
-      setOptions(response.data.listado);
+      setOptEstado(response.data.listado);
     })
     .catch((error) => {
-      console.error('Error fetching data from API:', error);
+      console.error('Error obteniendo datos desde API:', error);
+    });
+
+    axios.get(`http://localhost:4000/api/tipoCamiones/listadoTipoCamion`, {
+      headers: {
+        Authorization: cookies.get('token'), 
+      }})
+    .then((response) => {
+      setOptTipo(response.data.listado);
+    })
+    .catch((error) => {
+      console.error('Error obteniendo datos desde API:', error);
     });
   }, [])
 
@@ -87,7 +99,7 @@ export default function CreateCamion() {
                 onChange={(e) => setEstado(e.target.value)}
               >
                 <option value="">Seleccione un estado</option>
-                {options.map((option) => (
+                {optEstado.map((option) => (
                   <option key={option.id_estado} value={option.id_estado}>
                     {option.descripcion}
                   </option>
@@ -97,7 +109,19 @@ export default function CreateCamion() {
           </Form.Field>
           <Form.Field required>
             <label>Tipo</label>
-            <input type='text' placeholder='Tipo' onChange={(e) => setTipo(e.target.value)}/>
+            <div className="dropdown">
+              <select
+                value={idTipoCamion}
+                onChange={(e) => setTipo(e.target.value)}
+              >
+                <option value="">Seleccione un tipo</option>
+                {optTipo.map((option) => (
+                  <option key={option.id_estado} value={option.id_tipo}>
+                    {option.descripcion}
+                  </option>
+                ))}
+              </select>
+            </div>
           </Form.Field>
           <Button className="submit-button" onClick={postData} type='submit'>Crear</Button>
         </Form>
