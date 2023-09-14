@@ -14,6 +14,8 @@ export default function UpdateCamion() {
   const [kilometros, setKilometros] = useState('');
   const [idEstado, setEstado] = useState('');
   const [idTipoCamion, setTipo] = useState('');
+  const [optEstado, setOptEstado] = useState([]);
+  const [optTipo, setOptTipo] = useState([]);
 
   const navigate = useNavigate();
 
@@ -28,6 +30,28 @@ export default function UpdateCamion() {
     setKilometros(localStorage.getItem('Kilometros'));
     setEstado(localStorage.getItem('Estado'));
     setTipo(localStorage.getItem('Tipo'));
+
+    axios.get(`http://localhost:4000/api/estadoCamiones/listadoEstadoCamion`, {
+      headers: {
+        Authorization: cookies.get('token'), 
+      }})
+    .then((response) => {
+      setOptEstado(response.data.listado);
+    })
+    .catch((error) => {
+      console.error('Error obteniendo datos desde API:', error);
+    });
+
+    axios.get(`http://localhost:4000/api/tipoCamiones/listadoTipoCamion`, {
+      headers: {
+        Authorization: cookies.get('token'), 
+      }})
+    .then((response) => {
+      setOptTipo(response.data.listado);
+    })
+    .catch((error) => {
+      console.error('Error obteniendo datos desde API:', error);
+    });
   }, []);
 
   const updateAPIData = () => {
@@ -72,14 +96,38 @@ export default function UpdateCamion() {
           <label>Kilometros</label>
           <input type='number' placeholder='Kilometros' value={kilometros} onChange={(e) => setKilometros(e.target.value)}/>
         </Form.Field>
-        <Form.Field>
-          <label>Estado</label>
-          <input placeholder='Estado' value={idEstado} onChange={(e) => setEstado(e.target.value)}/>
-        </Form.Field>
-        <Form.Field>
-          <label>Tipo</label>
-          <input placeholder='Tipo' value={idTipoCamion} onChange={(e) => setTipo(e.target.value)}/>
-        </Form.Field>
+        <Form.Field required>
+            <label>Estado</label>
+            <div className="dropdown">
+              <select
+                value={idEstado}
+                onChange={(e) => setEstado(e.target.value)}
+              >
+                <option value="">Seleccione un estado</option>
+                {optEstado.map((option) => (
+                  <option key={option.id_estado} value={option.id_estado}>
+                    {option.descripcion}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </Form.Field>
+          <Form.Field required>
+            <label>Tipo</label>
+            <div className="dropdown">
+              <select
+                value={idTipoCamion}
+                onChange={(e) => setTipo(e.target.value)}
+              >
+                <option value="">Seleccione un tipo</option>
+                {optTipo.map((option) => (
+                  <option key={option.id_estado} value={option.id_tipo}>
+                    {option.descripcion}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </Form.Field>
         <Button type='submit' onClick={updateAPIData}>Modificar</Button>
       </Form>
     </div>
