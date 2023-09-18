@@ -7,10 +7,9 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-export default function UpdateChofer() {
+export default function UpdateTecnico() {
   const [usuario, setUsuario] = useState('');
-  const [licencia, setLicencia] = useState('');
-  const [telefono, setTelefono] = useState('');
+  const [especializacion, setEspecializacion] = useState('');
   const [nombre, setNombre] = useState('');
 
   const navigate = useNavigate();
@@ -21,17 +20,15 @@ export default function UpdateChofer() {
     }
     
     setUsuario(localStorage.getItem('Usuario'))
-    setLicencia(localStorage.getItem('Licencia'));
-    setTelefono(localStorage.getItem('Telefono'));
+    setEspecializacion(localStorage.getItem('Especializacion'));
     setNombre(localStorage.getItem('Nombre completo'))
   }, []);
 
   const updateAPIData = () => {
-    axios.post(`http://localhost:4000/api/empleados/modificarChofer`, {
+    axios.post(`http://localhost:4000/api/empleados/modificarTecnico`, {
       usuario,
 			nombre,
-			licencia,
-			telefono
+			especializacion
     },
     {
       headers: {
@@ -39,13 +36,13 @@ export default function UpdateChofer() {
       },
     }
     ).then(() => {
-      navigate('/abm/abmchoferes')
+      navigate('/abm/abmtecnicos')
     })
   }
 
   return (
     <div>
-      <Link to='/abm/abmchoferes'>
+      <Link to='/abm/abmtecnicos'>
         <button className='Btn'>Volver</button>
       </Link>
       &nbsp;
@@ -59,12 +56,8 @@ export default function UpdateChofer() {
           <input placeholder='Nombre completo' value={nombre} onChange={(e) => setNombre(e.target.value)}/>
         </Form.Field>
         <Form.Field>
-          <label>Licencia</label>
-          <input placeholder='Licencia' value={licencia} onChange={(e) => setLicencia(e.target.value)}/>
-        </Form.Field>
-        <Form.Field>
-          <label>Telefono</label>
-          <input placeholder='Telefono' value={telefono} onChange={(e) => setTelefono(e.target.value)}/>
+          <label>Especialización</label>
+          <input placeholder='Especialización' value={especializacion} onChange={(e) => setEspecializacion(e.target.value)}/>
         </Form.Field>
         <Button type='submit' onClick={updateAPIData}>Modificar</Button>
       </Form>

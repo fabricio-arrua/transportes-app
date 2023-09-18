@@ -7,12 +7,11 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-export default function CreateChofer() {
+export default function CreateTecnico() {
   const [usuario, setUsuario] = useState('');
-  const [contrasenia, setContrasenia] = useState('');
-  const [licencia, setLicencia] = useState('');
-  const [telefono, setTelefono] = useState('');
+  const [pass, setPass] = useState('');
   const [nombre, setNombre] = useState('');
+  const [especializacion, setEspecializacion] = useState('');
 
   const navigate = useNavigate();
 
@@ -23,19 +22,18 @@ export default function CreateChofer() {
   }, [])
 
   const postData = () => {
-		axios.post(`http://localhost:4000/api/empleados/altaChofer`, {
+		axios.post(`http://localhost:4000/api/empleados/altaTecnico`, {
 			usuario,
-			contrasenia,
+			pass,
 			nombre,
-			licencia,
-			telefono
+      especializacion
 		},
     {
       headers: {
         Authorization: cookies.get('token'), 
       },
     }).then(() => {
-      navigate('/abm/abmchoferes')
+      navigate('/abm/abmtecnicos')
     }).catch(error => {
       console.error('Ha ocurrido un error:', error);
     })
@@ -43,11 +41,11 @@ export default function CreateChofer() {
 
   return (
     <div className="App">
-      <Link to='/abm/abmchoferes' className="Btn">
+      <Link to='/abm/abmtecnicos' className="Btn">
         Volver
       </Link>
       <div className="form-container">
-        <h2 className="form-title">Registro de choferes</h2>
+        <h2 className="form-title">Registro de tecnicos</h2>
         <Form className="create-form">
           <Form.Field required>
             <label>Usuario</label>
@@ -55,19 +53,15 @@ export default function CreateChofer() {
           </Form.Field>
           <Form.Field required>
             <label>Contraseña</label>
-            <input type='password' placeholder='Contraseña' onChange={(e) => setContrasenia(e.target.value)}/>
+            <input type='password' placeholder='Contraseña' onChange={(e) => setPass(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
             <label>Nombre completo</label>
             <input placeholder='Nombre completo' onChange={(e) => setNombre(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
-            <label>Licencia</label>
-            <input placeholder='Licencia' onChange={(e) => setLicencia(e.target.value)}/>
-          </Form.Field>
-          <Form.Field required>
-            <label>Telefono</label>
-            <input placeholder='Telefono' onChange={(e) => setTelefono(e.target.value)}/>
+            <label>Especialización</label>
+            <input placeholder='Especialización' onChange={(e) => setEspecializacion(e.target.value)}/>
           </Form.Field>
           <Button className="submit-button" onClick={postData} type='submit'>Crear</Button>
         </Form>

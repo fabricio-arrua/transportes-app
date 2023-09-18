@@ -26,12 +26,14 @@ import CreateCamion from '../pages/admin/actions/create/CreateCamion'
 import CreateCliente from '../pages/admin/actions/create/CreateCliente'
 import CreateEstado from '../pages/admin/actions/create/CreateEstado'
 import CreateTipo from '../pages/admin/actions/create/CreateTipo'
+import CreateTecnico from '../pages/admin/actions/create/CreateTecnico'
 //update
 import UpdateChofer from '../pages/admin/actions/update/UpdateChofer'
 import UpdateCamion from '../pages/admin/actions/update/UpdateCamion'
 import UpdateCliente from '../pages/admin/actions/update/UpdateCliente'
 import UpdateEstado from '../pages/admin/actions/update/UpdateEstado'
 import UpdateTipo from '../pages/admin/actions/update/UpdateTipo'
+import UpdateTecnico from '../pages/admin/actions/update/UpdateTecnico'
 import ModPassword from '../pages/admin/actions/update/ModPassword'
 import AsignarTransporte from '../pages/admin/actions/AsignarTransporte'
 //pages-tecnico
@@ -59,11 +61,13 @@ function Rutas() {
         <Routes>
           <Route exact path='/' Component={Login2}/>
           <Route exact path='/homeadmin' Component={HomeAdmin}/>
+          <Route exact path='/abm/modPassword' Component={ModPassword}/>
           <Route exact path='/abm/abmchoferes' Component={ABMChoferes}/>
           <Route exact path='/abm/abmchoferes/CreateChofer' Component={CreateChofer}/>
           <Route exact path='/abm/abmchoferes/UpdateChofer' Component={UpdateChofer}/>
-          <Route exact path='/abm/abmchoferes/modPassword' Component={ModPassword}/>
           <Route exact path='/abm/abmtecnicos' Component={ABMTecnicos}/>
+          <Route exact path='/abm/abmtecnicos/CreateTecnico' Component={CreateTecnico}/>
+          <Route exact path='/abm/abmtecnicos/UpdateTecnico' Component={UpdateTecnico}/>
           <Route exact path='/abm/abmcamiones' Component={ABMCamiones}/>
           <Route exact path='/abm/abmcamiones/CreateCamion' Component={CreateCamion}/>
           <Route exact path='/abm/abmcamiones/UpdateCamion' Component={UpdateCamion}/>
