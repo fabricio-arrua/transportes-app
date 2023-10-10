@@ -2,14 +2,16 @@ import { Button, Form } from 'semantic-ui-react'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import '../../../../css/misBtns.css'
+import '../../../../css/misBtns.css';
 import Cookies from 'universal-cookie';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const cookies = new Cookies();
 
 export default function CreateTransporte() {
-  
-  const [fechaInicio, setFechaInicio] = useState('');
+
+  const [fechaInicio, setFechaInicio] = useState(new Date());
   const [kmRecorridos, setKms] = useState('');
   const [origen, setOrigen] = useState('');
   const [destino, setDestino] = useState('');
@@ -29,6 +31,8 @@ export default function CreateTransporte() {
     }
 
     setAdmin(cookies.get('usuario'));
+
+    console.log(cookies.get('token'));
 
     axios.get(`http://localhost:4000/api/camiones/listarCamion`, {
       headers: {
@@ -65,7 +69,7 @@ export default function CreateTransporte() {
   }, [])
 
   const postData = () => {
-    if(idChofer == '') {
+    if(idChofer === "") {
       axios.post(`http://localhost:4000/api/transportes/altaTransporteSinChofer`, {
         fechaInicio,
         kmRecorridos,
@@ -115,7 +119,14 @@ export default function CreateTransporte() {
         <Form className="create-form">
           <Form.Field required>
             <label>Fecha/Hora Inicio</label>
-            <input type='text' placeholder='Ingrese fecha y hora de inicio' onChange={(e) => setFechaInicio(e.target.value)}/>
+            <DatePicker
+              showTimeSelect
+              minDate={new Date()}
+              dateFormat="yyyy-MM-dd HH:mm:ss"
+              selected={fechaInicio}
+              onChange={fechaInicio => setFechaInicio(fechaInicio)}
+            />
+            {/*<input type='text' placeholder='Ingrese fecha y hora de inicio' onChange={(e) => setFechaInicio(e.target.value)}/>*/}
           </Form.Field>
           <Form.Field required>
             <label>Kms a recorrer</label>
