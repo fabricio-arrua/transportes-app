@@ -5,6 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import '../../../../css/misBtns.css';
 import Cookies from 'universal-cookie';
 import DatePicker from 'react-datepicker';
+import { format } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const cookies = new Cookies();
@@ -69,9 +70,11 @@ export default function CreateTransporte() {
   }, [])
 
   const postData = () => {
+    const fecha = format(fechaInicio, 'yyyy-MM-dd HH:mm:ss');
+
     if(idChofer === "") {
       axios.post(`http://localhost:4000/api/transportes/altaTransporteSinChofer`, {
-        fechaInicio,
+        fechaInicio:fecha,
         kmRecorridos,
         origen,
         destino,
@@ -89,7 +92,7 @@ export default function CreateTransporte() {
       })
     } else {
       axios.post(`http://localhost:4000/api/transportes/altaTransporteConChofer`, {
-        fechaInicio,
+        fechaInicio:fecha,
         kmRecorridos,
         origen,
         destino,
