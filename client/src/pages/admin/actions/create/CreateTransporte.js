@@ -129,7 +129,6 @@ export default function CreateTransporte() {
               selected={fechaInicio}
               onChange={fechaInicio => setFechaInicio(fechaInicio)}
             />
-            {/*<input type='text' placeholder='Ingrese fecha y hora de inicio' onChange={(e) => setFechaInicio(e.target.value)}/>*/}
           </Form.Field>
           <Form.Field required>
             <label>Kms a recorrer</label>
