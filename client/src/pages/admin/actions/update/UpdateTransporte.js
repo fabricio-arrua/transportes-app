@@ -32,8 +32,8 @@ export default function UpdateTransporte() {
     }
     
     setId(localStorage.getItem('Id'))
-    setFechaInicio(localStorage.getItem('Inicio'));
-    setFechaFin(localStorage.getItem('Fin'));
+    setFechaInicio(new Date(localStorage.getItem('Inicio')));
+    setFechaFin(new Date(localStorage.getItem('Fin')));
     setKms(localStorage.getItem('Distancia'));
     setOrigen(localStorage.getItem('Origen'));
     setDestino(localStorage.getItem('Destino'));
@@ -130,10 +130,6 @@ export default function UpdateTransporte() {
             selected={fechaFin}
             onChange={fechaFin => setFechaFin(fechaFin)}
           />
-        </Form.Field>
-        <Form.Field>
-          <label>Fecha fin</label>
-          <input type='text' value={fechaFin} onChange={(e) => setFechaFin(e.target.value)}/>
         </Form.Field>
         <Form.Field>
           <label>Distancia</label>
