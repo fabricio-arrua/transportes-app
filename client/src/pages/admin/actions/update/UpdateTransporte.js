@@ -13,7 +13,7 @@ const cookies = new Cookies();
 export default function UpdateTransporte() {
   const [idTransporte, setId] = useState('');
   const [fechaInicio, setFechaInicio] = useState(new Date());
-  const [fechaFin, setFechaFin] = useState(new Date());
+  const [fechaFin, setFechaFin] = useState();
   const [kmRecorridos, setKms] = useState('');
   const [origen, setOrigen] = useState('');
   const [destino, setDestino] = useState('');
@@ -33,7 +33,13 @@ export default function UpdateTransporte() {
     
     setId(localStorage.getItem('Id'))
     setFechaInicio(new Date(localStorage.getItem('Inicio')));
-    setFechaFin(new Date(localStorage.getItem('Fin')));
+
+    if(new Date(localStorage.getItem('Fin')).toString() === 'Invalid Date'){
+      setFechaFin(new Date('2999-01-01 00:00:00'))
+    } else {
+      setFechaFin(new Date(localStorage.getItem('Fin')));
+    }
+
     setKms(localStorage.getItem('Distancia'));
     setOrigen(localStorage.getItem('Origen'));
     setDestino(localStorage.getItem('Destino'));
