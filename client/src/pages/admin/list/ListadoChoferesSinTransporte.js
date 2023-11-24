@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from 'semantic-ui-react';
+import { Table, Button, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../../css/misBtns.css';
@@ -12,6 +12,7 @@ const cookies = new Cookies();
 export default function ListadoChoferesSinTransporte() {
 
   const [APIData, setAPIData] = useState([]);
+  const [APIError, setAPIError] = useState([]);
 
   useEffect(() => {
     if(cookies.get('tipo') !== 'A'){
@@ -23,10 +24,14 @@ export default function ListadoChoferesSinTransporte() {
         Authorization: cookies.get('token'), 
       }})
       .then((response) => {
-        setAPIData(response.data.listado);
+        if (response.data.listado){
+          setAPIData(response.data.listado);
+        } else {
+          setAPIError(response.data.message)
+        }
       })
-      .catch(error => {
-        console.log(error);
+      .catch((error) => {
+        console.log(error.response);
       });
   }, [])
 
@@ -38,6 +43,11 @@ export default function ListadoChoferesSinTransporte() {
   return (
     <div>
       <ExcelExport excelData={APIData} fileName={"Listado de choferes sin transporte"} />
+
+      <Header as='h1' color='yellow'>
+          {APIError}
+      </Header>
+
       <Table singleLine>
         <Table.Header>
           <Table.Row>
@@ -51,8 +61,8 @@ export default function ListadoChoferesSinTransporte() {
 
         <Table.Body>
           {Object.values(APIData).map((data) => {
-            return (
-              <Table.Row>
+              return (
+                <Table.Row>
                   <Table.Cell>{data.usuarioC}</Table.Cell>
                   <Table.Cell>{data.nro_licencia}</Table.Cell>
                   <Table.Cell>{data.telefono}</Table.Cell>
@@ -63,7 +73,7 @@ export default function ListadoChoferesSinTransporte() {
                     </Table.Cell>
                   </Link>
                 </Table.Row>
-          )})}
+            )})}
         </Table.Body>
       </Table>
     </div>
