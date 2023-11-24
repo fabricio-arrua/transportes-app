@@ -10,6 +10,7 @@ const cookies = new Cookies();
 export default function ListadoDeClientes() {
 
   const [APIData, setAPIData] = useState([]);
+  const [APIError, setAPIError] = useState([]);
 
   useEffect(() => {
     if(cookies.get('tipo') !== 'A'){
@@ -21,8 +22,11 @@ export default function ListadoDeClientes() {
         Authorization: cookies.get('token'), 
       }})
       .then((response) => {
-        console.log(response.data);
-        setAPIData(response.data.listado);
+        if (response.data.listado){
+          setAPIData(response.data.listado);
+        } else {
+          setAPIError(response.data.message)
+        }
       })
       .catch(error => {
         console.log(error);
@@ -32,6 +36,11 @@ export default function ListadoDeClientes() {
   return (
     <div>
       <ExcelExport excelData={APIData} fileName={"Listado de clientes"} />
+
+      <Header as='h1' color='yellow'>
+          {APIError}
+      </Header>
+      
       <Table singleLine>
         <Table.Header>
           <Table.Row>
