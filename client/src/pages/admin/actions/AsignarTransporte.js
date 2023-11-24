@@ -9,8 +9,10 @@ const cookies = new Cookies();
 
 export default function AsignarTransporte() {
   const [usuario, setUsuario] = useState('');
-  const [transporte, setTransporte] = useState('');
-  const [camion, setCamion] = useState('');
+  const [id_transporte, setTransporte] = useState('');
+  const [matricula, setMatricula] = useState('');
+  const [optTransporte, setOptTransporte] = useState([]);
+  const [optMatricula, setOptMatricula] = useState([]);
 
   const navigate = useNavigate();
 
@@ -20,13 +22,35 @@ export default function AsignarTransporte() {
     }
     
     setUsuario(localStorage.getItem('Usuario'))
+
+    axios.get(`http://localhost:4000/api/transportes/listadoTransporteSinChofer`, {
+      headers: {
+        Authorization: cookies.get('token'), 
+      }})
+      .then((response) => {
+        setOptTransporte(response.data.listado);
+      })
+      .catch((error) => {
+        console.error('Error obteniendo datos desde API:', error);
+      });
+    
+    axios.get(`http://localhost:4000/api/camiones/listarCamion`, {
+      headers: {
+        Authorization: cookies.get('token'), 
+      }})
+      .then((response) => {
+        setOptMatricula(response.data.listado);
+      })
+      .catch((error) => {
+        console.error('Error obteniendo datos desde API:', error);
+      });
   }, []);
 
   const updateAPIData = () => {
     axios.post(`http://localhost:4000/api/transportes/asignarTransporte`, {
-			transporte,
-      usuario,
-			camion
+			idTransporte:id_transporte,
+      idChofer:usuario,
+			idCamion:matricula
     },
     {
       headers: {
@@ -51,11 +75,35 @@ export default function AsignarTransporte() {
         </Form.Field>
         <Form.Field>
           <label>Transporte</label>
-          <input placeholder='Ingrese id transporte' onChange={(e) => setTransporte(e.target.value)}/>
+          <div className="dropdown">
+            <select
+              value={id_transporte}
+              onChange={(e) => setTransporte(e.target.value)}
+            >
+              <option value="">Seleccione un Transporte</option>
+              {optTransporte.map((option) => (
+                <option key={option.id_transporte} value={option.id_transporte}>
+                  Origen:{option.origen} / Destino:{option.destino} / Cliente:{option.documentoCliente}
+                </option>
+              ))}
+            </select>
+          </div>
         </Form.Field>
         <Form.Field>
-          <label>Camión</label>
-          <input placeholder='Ingrese matricula de camión' onChange={(e) => setCamion(e.target.value)}/>
+          <label>Matrícula</label>
+          <div className="dropdown">
+            <select
+              value={matricula}
+              onChange={(e) => setMatricula(e.target.value)}
+            >
+              <option value="">Seleccione un camión</option>
+              {optMatricula.map((option) => (
+                <option key={option.matricula} value={option.matricula}>
+                  Matrícula:{option.matricula} / Marca:{option.marca} / Tipo:{option.id_tipo}
+                </option>
+              ))}
+            </select>
+          </div>
         </Form.Field>
         <Button type='submit' onClick={updateAPIData}>Asignar</Button>
       </Form>
