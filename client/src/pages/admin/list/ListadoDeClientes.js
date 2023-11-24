@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import '../../../css/misBtns.css';
 import ExcelExport from '../actions/ExcelExport';
@@ -40,7 +40,7 @@ export default function ListadoDeClientes() {
       <Header as='h1' color='yellow'>
           {APIError}
       </Header>
-      
+
       <Table singleLine>
         <Table.Header>
           <Table.Row>
