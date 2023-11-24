@@ -63,11 +63,11 @@ export default function CreateChofer() {
           </Form.Field>
           <Form.Field required>
             <label>Licencia</label>
-            <input placeholder='Licencia' onChange={(e) => setLicencia(e.target.value)}/>
+            <input placeholder='Licencia' onChange={(e) => setLicencia(e.target.value.toUpperCase())}/>
           </Form.Field>
           <Form.Field required>
             <label>Telefono</label>
-            <input placeholder='Telefono' onChange={(e) => setTelefono(e.target.value)}/>
+            <input type='number' placeholder='Telefono' onChange={(e) => setTelefono(e.target.value)}/>
           </Form.Field>
           <Button className="submit-button" onClick={postData} type='submit'>Crear</Button>
         </Form>

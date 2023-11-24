@@ -45,7 +45,7 @@ export default function CreateEstado() {
         <Form className="create-form">
           <Form.Field required>
             <label>Id</label>
-            <input placeholder='Ingrese un identificador' onChange={(e) => setId(e.target.value)}/>
+            <input placeholder='Ingrese un identificador' onChange={(e) => setId(e.target.value.toUpperCase())}/>
           </Form.Field>
           <Form.Field required>
             <label>Descripción</label>

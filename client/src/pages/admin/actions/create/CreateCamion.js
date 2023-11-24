@@ -77,7 +77,7 @@ export default function CreateCamion() {
         <Form className="create-form">
           <Form.Field required>
             <label>Matricula</label>
-            <input placeholder='ej: ABC1234' onChange={(e) => setMatricula(e.target.value)}/>
+            <input placeholder='ej: ABC1234' onChange={(e) => setMatricula(e.target.value.toUpperCase())}/>
           </Form.Field>
           <Form.Field required>
             <label>Año</label>

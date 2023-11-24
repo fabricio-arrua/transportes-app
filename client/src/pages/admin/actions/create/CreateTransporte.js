@@ -132,7 +132,7 @@ export default function CreateTransporte() {
           </Form.Field>
           <Form.Field required>
             <label>Kms a recorrer</label>
-            <input type='text' placeholder='Ingrese cantidad de kilometros a recorrer' onChange={(e) => setKms(e.target.value)}/>
+            <input type='number' placeholder='Ingrese cantidad de kilometros a recorrer' onChange={(e) => setKms(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
             <label>Origen</label>
