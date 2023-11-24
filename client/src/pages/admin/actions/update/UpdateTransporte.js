@@ -89,8 +89,6 @@ export default function UpdateTransporte() {
       fechaF=null;
     }
 
-    console.log(fechaF);
-
     axios.post(`http://localhost:4000/api/transportes/modificarTransporte`, {
       idTransporte,
       fechaInicio:fechaI,
