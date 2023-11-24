@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import '../../../css/misBtns.css';
 import ExcelExport from '../actions/ExcelExport';
@@ -10,6 +10,7 @@ const cookies = new Cookies();
 export default function ListadoDeGastos() {
 
   const [APIData, setAPIData] = useState([]);
+  const [APIError, setAPIError] = useState([]);
   const f = new Intl.DateTimeFormat("en-BG", {dateStyle: "short"});
 
   useEffect(() => {
@@ -22,17 +23,25 @@ export default function ListadoDeGastos() {
         Authorization: cookies.get('token'), 
       }})
       .then((response) => {
-        console.log(response.data);
-        setAPIData(response.data.listado);
+        if (response.data.listado){
+          setAPIData(response.data.listado);
+        } else {
+          setAPIError(response.data.message)
+        }
       })
       .catch(error => {
-        console.log(error);
+        console.log(error.response);
       });
   }, [])
 
   return (
     <div>
       <ExcelExport excelData={APIData} fileName={"Listado de gastos"} />
+
+      <Header as='h1' color='yellow'>
+          {APIError}
+      </Header>
+
       <Table singleLine>
         <Table.Header>
           <Table.Row>

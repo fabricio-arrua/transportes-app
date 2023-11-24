@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import '../../../css/misBtns.css';
 import ExcelExport from '../actions/ExcelExport';
@@ -10,6 +10,7 @@ const cookies = new Cookies();
 export default function ListadoTransportesNoRealizados() {
 
   const [APIData, setAPIData] = useState([]);
+  const [APIError, setAPIError] = useState([]);
   const f = new Intl.DateTimeFormat("en-BG", {dateStyle: 'short', timeStyle: 'short'});
 
   useEffect(() => {
@@ -22,8 +23,11 @@ export default function ListadoTransportesNoRealizados() {
         Authorization: cookies.get('token'), 
       }})
       .then((response) => {
-        console.log(response.data);
-        setAPIData(response.data.listado);
+        if (response.data.listado){
+          setAPIData(response.data.listado);
+        } else {
+          setAPIError(response.data.message)
+        }
       })
       .catch(error => {
         console.log(error);
@@ -33,6 +37,11 @@ export default function ListadoTransportesNoRealizados() {
   return (
     <div>
       <ExcelExport excelData={APIData} fileName={"Transportes no realizados"} />
+
+      <Header as='h1' color='yellow'>
+          {APIError}
+      </Header>
+      
       <Table singleLine>
         <Table.Header>
           <Table.Row>
