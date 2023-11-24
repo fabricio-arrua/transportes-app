@@ -82,8 +82,14 @@ export default function UpdateTransporte() {
   }, []);
 
   const updateAPIData = () => {
-    const fechaI = format(fechaInicio, 'yyyy-MM-dd HH:mm:ss');
-    const fechaF = format(fechaFin, 'yyyy-MM-dd HH:mm:ss');
+    var fechaI = format(fechaInicio, 'yyyy-MM-dd HH:mm:ss');
+    var fechaF = format(fechaFin, 'yyyy-MM-dd HH:mm:ss');
+
+    if(fechaF.toString() === '2999-01-01 00:00:00'){
+      fechaF=null;
+    }
+
+    console.log(fechaF);
 
     axios.post(`http://localhost:4000/api/transportes/modificarTransporte`, {
       idTransporte,
