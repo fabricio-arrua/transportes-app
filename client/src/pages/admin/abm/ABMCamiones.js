@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from 'semantic-ui-react';
+import { Table, Button, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../../css/misBtns.css';
@@ -12,6 +12,7 @@ const cookies = new Cookies();
 export default function ABMCamiones() {
 
   const [APIData, setAPIData] = useState([]);
+  const [Error, setError] = useState([]);
   const [matric, setMatricula] = useState('');
   
   useEffect(() => {
@@ -41,7 +42,9 @@ export default function ABMCamiones() {
     localStorage.setItem('Tipo', id_tipo)
   }
 
-  const onDelete = (data) => {
+  const onDelete = (data, e) => {
+    e.preventDefault();
+
     let { matricula } = data;
     localStorage.setItem('Matricula', matricula);
     setMatricula(localStorage.getItem('Matricula'))
@@ -54,11 +57,11 @@ export default function ABMCamiones() {
         Authorization: cookies.get('token'), 
       },
     })
-    .then(() => {
-      getData();
+    .then((response) => {
+        setError(response.data.message);
+        getData();
     })
   }
-
   const getData = () => {
     axios.get(`http://localhost:4000/api/camiones/listarCamion`, {
       headers: {
@@ -77,6 +80,11 @@ export default function ABMCamiones() {
       <Link to='/abm/abmcamiones/createCamion'>
         <button className='Btn'>Crear</button>
       </Link>
+
+      <Header as='h1' color='yellow'>
+          {Error}
+      </Header>
+
       <Table singleLine>
         <Table.Header>
           <Table.Row>
@@ -107,7 +115,7 @@ export default function ABMCamiones() {
                     </Table.Cell>
                   </Link>
                   <Table.Cell>
-                    <Button onClick={() => {onDelete(data);}}><FaIcons.FaTrash /></Button>
+                    <Button onClick={(e) => onDelete(data, e)}><FaIcons.FaTrash /></Button>
                   </Table.Cell>
                 </Table.Row>
           )})}
