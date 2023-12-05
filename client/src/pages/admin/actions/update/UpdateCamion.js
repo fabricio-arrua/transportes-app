@@ -86,7 +86,7 @@ export default function UpdateCamion() {
         </Form.Field>
         <Form.Field>
           <label>Año</label>
-          <input type='number' placeholder='Año' value={anio} onChange={(e) => setAnio(e.target.value)}/>
+          <input type='number' min='1950' placeholder='Año' value={anio} onChange={(e) => setAnio(e.target.value)}/>
         </Form.Field>
         <Form.Field>
           <label>Marca</label>
@@ -94,7 +94,7 @@ export default function UpdateCamion() {
         </Form.Field>
         <Form.Field>
           <label>Kilometros</label>
-          <input type='number' placeholder='Kilometros' value={kilometros} onChange={(e) => setKilometros(e.target.value)}/>
+          <input type='number' min='0' placeholder='Kilometros' value={kilometros} onChange={(e) => setKilometros(e.target.value)}/>
         </Form.Field>
         <Form.Field required>
             <label>Estado</label>
