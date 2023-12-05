@@ -81,7 +81,7 @@ export default function CreateCamion() {
           </Form.Field>
           <Form.Field required>
             <label>Año</label>
-            <input type='number' placeholder='2023' onChange={(e) => setAnio(e.target.value)}/>
+            <input type='number' min='1950' placeholder='2023' onChange={(e) => setAnio(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
             <label>Marca</label>
@@ -89,7 +89,7 @@ export default function CreateCamion() {
           </Form.Field>
           <Form.Field required>
             <label>Kilometros</label>
-            <input type='number' placeholder='Cantidad de kilometros' onChange={(e) => setKilometros(e.target.value)}/>
+            <input type='number' min='0' placeholder='Cantidad de kilometros' onChange={(e) => setKilometros(e.target.value)}/>
           </Form.Field>
           <Form.Field required>
             <label>Estado</label>

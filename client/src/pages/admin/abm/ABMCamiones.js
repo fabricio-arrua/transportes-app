@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Table, Button, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -14,6 +14,7 @@ export default function ABMCamiones() {
   const [APIData, setAPIData] = useState([]);
   const [Error, setError] = useState([]);
   const [matric, setMatricula] = useState('');
+  const [errorExists, setErrorExists] = useState(false);
   
   useEffect(() => {
     if(cookies.get('tipo') !== 'A'){
@@ -30,6 +31,8 @@ export default function ABMCamiones() {
       .catch(error => {
         console.log(error);
       });
+  
+      setMatricula(localStorage.getItem('Matricula'));
   }, [])
 
   const setData = (data) => {
@@ -42,12 +45,11 @@ export default function ABMCamiones() {
     localStorage.setItem('Tipo', id_tipo)
   }
 
-  const onDelete = (data, e) => {
-    e.preventDefault();
+  const onDelete = (data) => {
 
     let { matricula } = data;
     localStorage.setItem('Matricula', matricula);
-    setMatricula(localStorage.getItem('Matricula'))
+    setMatricula(localStorage.getItem('Matricula'));
 
     axios.post(`http://localhost:4000/api/camiones/eliminarCamion`, {
       matricula:matric
@@ -59,9 +61,11 @@ export default function ABMCamiones() {
     })
     .then((response) => {
         setError(response.data.message);
+        setErrorExists(true);
         getData();
     })
   }
+
   const getData = () => {
     axios.get(`http://localhost:4000/api/camiones/listarCamion`, {
       headers: {
@@ -75,15 +79,23 @@ export default function ABMCamiones() {
       });
   }
 
+  const clearError = () => {
+      setError(null);
+      setErrorExists(false);
+  }
+
   return (
     <div>
       <Link to='/abm/abmcamiones/createCamion'>
         <button className='Btn'>Crear</button>
       </Link>
 
-      <Header as='h1' color='yellow'>
-          {Error}
-      </Header>
+      <div>
+        {errorExists
+        ? <a>{Error}<button type='button' onClick={() => clearError()}><AiIcons.AiOutlineClose /></button></a>
+        : <a></a>
+        }
+      </div>
 
       <Table singleLine>
         <Table.Header>
@@ -115,7 +127,7 @@ export default function ABMCamiones() {
                     </Table.Cell>
                   </Link>
                   <Table.Cell>
-                    <Button onClick={(e) => onDelete(data, e)}><FaIcons.FaTrash /></Button>
+                    <Button onClick={() => onDelete(data)}><FaIcons.FaTrash /></Button>
                   </Table.Cell>
                 </Table.Row>
           )})}
