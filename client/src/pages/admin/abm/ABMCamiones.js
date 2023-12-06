@@ -6,14 +6,14 @@ import '../../../css/misBtns.css';
 import Cookies from 'universal-cookie';
 import * as AiIcons from 'react-icons/ai';
 import * as FaIcons from 'react-icons/fa';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const cookies = new Cookies();
 
 export default function ABMCamiones() {
 
   const [APIData, setAPIData] = useState([]);
-  const [Error, setError] = useState([]);
-  const [errorExists, setErrorExists] = useState(false);
   
   useEffect(() => {
     if(cookies.get('tipo') !== 'A'){
@@ -57,8 +57,31 @@ export default function ABMCamiones() {
       },
     })
     .then((response) => {
-        setError(response.data.message);
-        setErrorExists(true);
+
+      if(response.data.message === 'Baja realizada con éxito'){
+        toast.success(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      } else {
+        toast.error(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      }
+      
         getData();
     })
   }
@@ -76,28 +99,29 @@ export default function ABMCamiones() {
       });
   }
 
-  const clearError = () => {
-      setError(null);
-      setErrorExists(false);
-  }
-
   return (
     <div>
       <Link to='/abm/abmcamiones/createCamion'>
         <button className='Btn'>Crear</button>
       </Link>
 
-      <div>
-        {errorExists
-        ? <p>{Error}<button type='button' onClick={() => clearError()}><AiIcons.AiOutlineClose /></button></p>
-        : <p></p>
-        }
-      </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        />
 
       <Table singleLine>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Matricula</Table.HeaderCell>
+            <Table.HeaderCell>Matrícula</Table.HeaderCell>
             <Table.HeaderCell>Año</Table.HeaderCell>
             <Table.HeaderCell>Marca</Table.HeaderCell>
             <Table.HeaderCell>Kilometros</Table.HeaderCell>
