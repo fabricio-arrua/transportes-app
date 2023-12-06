@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { Table, Button, Header } from 'semantic-ui-react';
+import React, { useState, useEffect } from 'react';
+import { Table, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../../css/misBtns.css';
@@ -89,8 +89,8 @@ export default function ABMCamiones() {
 
       <div>
         {errorExists
-        ? <a>{Error}<button type='button' onClick={() => clearError()}><AiIcons.AiOutlineClose /></button></a>
-        : <a></a>
+        ? <p>{Error}<button type='button' onClick={() => clearError()}><AiIcons.AiOutlineClose /></button></p>
+        : <p></p>
         }
       </div>
 
