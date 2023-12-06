@@ -13,7 +13,6 @@ export default function ABMCamiones() {
 
   const [APIData, setAPIData] = useState([]);
   const [Error, setError] = useState([]);
-  const [matric, setMatricula] = useState('');
   const [errorExists, setErrorExists] = useState(false);
   
   useEffect(() => {
@@ -32,7 +31,6 @@ export default function ABMCamiones() {
         console.log(error);
       });
   
-      setMatricula(localStorage.getItem('Matricula'));
   }, [])
 
   const setData = (data) => {
@@ -48,11 +46,10 @@ export default function ABMCamiones() {
   const onDelete = (data) => {
 
     let { matricula } = data;
-    localStorage.setItem('Matricula', matricula);
-    setMatricula(localStorage.getItem('Matricula'));
+    const mat = matricula;
 
     axios.post(`http://localhost:4000/api/camiones/eliminarCamion`, {
-      matricula:matric
+      matricula:mat
     },
     {
       headers: {
