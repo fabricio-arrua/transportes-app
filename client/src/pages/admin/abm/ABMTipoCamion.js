@@ -6,13 +6,14 @@ import '../../../css/misBtns.css';
 import Cookies from 'universal-cookie';
 import * as AiIcons from 'react-icons/ai';
 import * as FaIcons from 'react-icons/fa';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const cookies = new Cookies();
 
 export default function ABMTipoCamion() {
 
   const [APIData, setAPIData] = useState([]);
-  const [idTipo, setId] = useState('');
   
   useEffect(() => {
     if(cookies.get('tipo') !== 'A'){
@@ -40,8 +41,7 @@ export default function ABMTipoCamion() {
 
   const onDelete = (data) => {
     let { id_tipo } = data;
-    localStorage.setItem('Id', id_tipo);
-    setId(localStorage.getItem('Id'))
+    const idTipo = id_tipo;
 
     axios.post(`http://localhost:4000/api/tipoCamiones/eliminarTipoCamion/`, {
       idTipo
@@ -50,9 +50,33 @@ export default function ABMTipoCamion() {
       headers: {
         Authorization: cookies.get('token'), 
       },
-    }
-    ).then(() => {
-      getData();
+    }).then((response) => {
+
+      if(response.data.message === 'Baja realizada con éxito'){
+        toast.success(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      } else {
+        toast.error(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      }
+      
+        getData();
     })
   }
 
@@ -71,6 +95,20 @@ export default function ABMTipoCamion() {
       <Link to='/abm/abmtipocamion/CreateTipo'>
         <button className='Btn'>Crear</button>
       </Link>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        />
+        
       <Table singleLine>
         <Table.Header>
           <Table.Row>

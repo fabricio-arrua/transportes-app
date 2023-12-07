@@ -6,13 +6,14 @@ import '../../../css/misBtns.css';
 import Cookies from 'universal-cookie';
 import * as AiIcons from 'react-icons/ai';
 import * as FaIcons from 'react-icons/fa';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const cookies = new Cookies();
 
 export default function ABMTransportes() {
 
   const [APIData, setAPIData] = useState([]);
-  const [idTransporte, setId] = useState('');
   const f = new Intl.DateTimeFormat("en-BG", {dateStyle: 'short', timeStyle: 'short'});
   
   useEffect(() => {
@@ -46,8 +47,7 @@ export default function ABMTransportes() {
 
   const onDelete = (data) => {
     let { id_transporte } = data;
-    localStorage.setItem('Id', id_transporte);
-    setId(localStorage.getItem('Id'))
+    const idTransporte = id_transporte;
 
     axios.post(`http://localhost:4000/api/transportes/eliminarTransporte/`, {
       idTransporte
@@ -56,9 +56,33 @@ export default function ABMTransportes() {
       headers: {
         Authorization: cookies.get('token'), 
       },
-    }
-    ).then(() => {
-      getData();
+    }).then((response) => {
+
+      if(response.data.message === 'Se eliminó el transporte exitosamente'){
+        toast.success(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      } else {
+        toast.error(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      }
+      
+        getData();
     })
   }
 
@@ -77,6 +101,20 @@ export default function ABMTransportes() {
       <Link to='/abm/abmtransportes/CreateTransporte'>
         <button className='Btn'>Crear</button>
       </Link>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        />
+
       <Table singleLine>
         <Table.Header>
           <Table.Row>
