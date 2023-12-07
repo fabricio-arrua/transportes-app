@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../../../../css/misBtns.css'
 import Cookies from 'universal-cookie';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const cookies = new Cookies();
 
@@ -61,10 +63,95 @@ export default function CreateCamion() {
       headers: {
         Authorization: cookies.get('token'), 
       },
-    })
-    .then(() => {
-      navigate('/abm/abmcamiones')
-    })
+    }).then((response) => {
+
+      if(response.data.message === 'Alta realizada con éxito'){
+          navigate('/abm/abmcamiones');
+      } else {
+        toast.error(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      }
+
+    }).catch(function (error) {
+      if (error.response) {
+        console.log(error.response.data + 'error.response.data');
+        toast.error(error.response.data, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+        console.log(error.response.status + 'error.response.status');
+        toast.error('Error comuniquese con sistemas', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+        console.log(error.response.header + 'error.response.header');
+        toast.error(error.response.headers, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      } else if (error.request) {
+        console.log(error.request + 'error.request');
+        toast.error(error.request, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      } else {
+        console.log(error.message + 'error.message');
+        toast.error(error.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      }
+      console.log(error.config + 'error.config');
+      toast.error(error.config, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
+    });
   }
 
   return (
@@ -72,24 +159,54 @@ export default function CreateCamion() {
       <Link to='/abm/abmcamiones' className="Btn">
         Volver
       </Link>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        />
+
       <div className="form-container">
         <h2 className="form-title">Registro de camiones</h2>
         <Form className="create-form">
           <Form.Field required>
             <label>Matricula</label>
-            <input placeholder='ej: ABC1234' onChange={(e) => setMatricula(e.target.value.toUpperCase())}/>
+            <input placeholder='ej: ABC1234'
+              pattern='[A-Za-z]{3}[0-9]{4}'
+              maxLength={7}
+              title='Debe contener 3 letras y 4 números'
+              onChange={(e) => setMatricula(e.target.value.toUpperCase())
+            }/>
           </Form.Field>
           <Form.Field required>
             <label>Año</label>
-            <input type='number' min='1950' placeholder='2023' onChange={(e) => setAnio(e.target.value)}/>
+            <input type='number' 
+              required min='1950'
+              placeholder='2023'
+              onChange={(e) => setAnio(e.target.value)
+            }/>
           </Form.Field>
           <Form.Field required>
             <label>Marca</label>
-            <input type='text' placeholder='Ingrese una marca' onChange={(e) => setMarca(e.target.value)}/>
+            <input type='text'
+              placeholder='Ingrese una marca'
+              onChange={(e) => setMarca(e.target.value)
+            }/>
           </Form.Field>
           <Form.Field required>
             <label>Kilometros</label>
-            <input type='number' min='0' placeholder='Cantidad de kilometros' onChange={(e) => setKilometros(e.target.value)}/>
+            <input type='number'
+              required min='0'
+              placeholder='Cantidad de kilometros'
+              onChange={(e) => setKilometros(e.target.value)
+            }/>
           </Form.Field>
           <Form.Field required>
             <label>Estado</label>
