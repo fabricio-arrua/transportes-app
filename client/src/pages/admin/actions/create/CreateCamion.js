@@ -182,6 +182,8 @@ export default function CreateCamion() {
       />
 
       <form onSubmit={formik.handleSubmit}>
+      <h2 className="form-title">Registro de camiones</h2>
+
         <div className='form-control'>
           <label htmlFor='matricula'>Matrícula</label>
           <input 

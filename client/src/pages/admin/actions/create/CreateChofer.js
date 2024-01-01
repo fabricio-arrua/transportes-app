@@ -152,6 +152,7 @@ export default function CreateChofer() {
       />
 
       <form onSubmit={formik.handleSubmit}>
+      <h2 className="form-title">Registro de choferes</h2>
 
         <div className='form-control'>
           <label htmlFor='usuario'>Usuario</label>
