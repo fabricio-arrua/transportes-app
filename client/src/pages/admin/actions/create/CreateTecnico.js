@@ -12,7 +12,7 @@ const cookies = new Cookies();
 
 const initialValues = {
   usuario: '',
-  pass: '',
+  contrasenia: '',
   nombre: '',
   especializacion: ''
 }
@@ -37,7 +37,7 @@ export default function CreateTecnico() {
     onSubmit: values => {
       axios.post(`http://localhost:4000/api/empleados/altaTecnico`, {
         usuario: values.usuario,
-        pass: values.pass,
+        contrasenia: values.contrasenia,
         nombre: values.nombre,
         especializacion: values.especializacion
       },
@@ -171,15 +171,15 @@ export default function CreateTecnico() {
         </div>
 
         <div className='form-control'>
-          <label htmlFor='pass'>Contraseña</label>
+          <label htmlFor='contrasenia'>Contraseña</label>
           <input
             type='password'
-            name='pass'
+            name='contrasenia'
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.pass}>
+            value={formik.values.contrasenia}>
           </input>
-          {formik.touched.pass && formik.errors.pass ? <div className='error'>{formik.errors.pass}</div> : null}
+          {formik.touched.contrasenia && formik.errors.contrasenia ? <div className='error'>{formik.errors.contrasenia}</div> : null}
         </div>
 
         <div className='form-control'>
