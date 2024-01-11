@@ -3,17 +3,21 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../../../../css/misBtns.css';
 import Cookies from 'universal-cookie';
+//Dates
 import DatePicker from 'react-datepicker';
 import { format } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
+//Notificaciones
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { useFormik } from 'formik';
+//Formik & Yup
+import { useFormik, Field, FormikProvider } from 'formik';
 import { transporteValidations } from "../../../../validations/transporteValidations";
 
 const cookies = new Cookies();
 
 const initialValues = {
+  fechaInicio: '',
   kmRecorridos: '',
   origen: '',
   destino: '',
@@ -28,7 +32,6 @@ export default function CreateTransporte() {
   const [optCliente, setOptCliente] = useState([]);
   const [optChofer, setOptChofer] = useState([]);
   const [idAdmin, setAdmin] = useState('');
-  const [fechaInicio, setFechaInicio] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,7 +81,7 @@ export default function CreateTransporte() {
   const formik = useFormik({
     initialValues,
     onSubmit: values => {
-      const fecha = format(fechaInicio, 'yyyy-MM-dd HH:mm:ss');
+      const fecha = format(values.fechaInicio, 'yyyy-MM-dd HH:mm:ss');
 
       console.log("llega hasta aca");
 
@@ -310,121 +313,127 @@ export default function CreateTransporte() {
         theme="colored"
       />
 
-      <form onSubmit={formik.handleSubmit}>
-      <h2 className="form-title">Registro de transportes</h2>
+      <FormikProvider value={formik}>
+        <form onSubmit={formik.handleSubmit}>
+          <h2 className="form-title">Registro de transportes</h2>
 
-        <div className='form-control'>
-          <label htmlFor='fechaInicio'>Fecha/Hora Inicio</label>
-          <DatePicker
-            showTimeSelect
-            minDate={new Date()}
-            dateFormat="yyyy-MM-dd HH:mm:ss"
-            selected={fechaInicio}
-            onBlur={formik.handleBlur}
-            onChange={fechaInicio => setFechaInicio(fechaInicio)}
-          />
-          
-          {formik.touched.fechaInicio && formik.errors.fechaInicio ? <div className='error'>{formik.errors.fechaInicio}</div> : null}
-        </div>
-
-        <div className='form-control'>
-          <label htmlFor='kmRecorridos'>Kms a recorrer</label>
-          <input
-            type='text'
-            name='kmRecorridos'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.kmRecorridos}>
-          </input>
-          {formik.touched.kmRecorridos && formik.errors.kmRecorridos ? <div className='error'>{formik.errors.kmRecorridos}</div> : null}
-        </div>
-
-        <div className='form-control'>
-          <label htmlFor='origen'>Origen</label>
-          <input
-            type='text'
-            name='origen'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.origen}>
-          </input>
-          {formik.touched.origen && formik.errors.origen ? <div className='error'>{formik.errors.origen}</div> : null}
-        </div>
-
-        <div className='form-control'>
-          <label htmlFor='destino'>Destino</label>
-          <input
-            type='text'
-            name='destino'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.destino}>
-          </input>
-          {formik.touched.destino && formik.errors.destino ? <div className='error'>{formik.errors.destino}</div> : null}
-        </div>
-
-        <div className='form-control'>
-          <label htmlFor='matricula'>Matrícula</label>
-          <div className="dropdown">
-            <select
-            name='matricula'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.matricula}
-            >
-            <option value="">Seleccione una matrícula</option>
-            {optMatricula.map((option) => (
-              <option key={option.matricula} value={option.matricula}>
-              {option.matricula}
-              </option>
-            ))}
-            </select>
+          <div>
+            <label htmlFor="fechaInicio">Fecha/Hora Inicio</label>
+            <Field name="fechaInicio">
+              {({ field, form }) => (
+                <DatePicker
+                  showTimeSelect
+                  minDate={new Date()}
+                  dateFormat="yyyy-MM-dd HH:mm:ss"
+                  id="fechaInicio"
+                  {...field}
+                  selected={field.value}
+                  onChange={(fechaInicio) => form.setFieldValue(field.name, fechaInicio)}
+                />
+              )}
+            </Field>
+            {formik.touched.fechaInicio && formik.errors.fechaInicio ? <div className='error'>{formik.errors.fechaInicio}</div> : null}
           </div>
-          { formik.touched.matricula && formik.errors.matricula ? <div className='error'>{formik.errors.matricula}</div> : null}
-        </div>
 
-        <div className='form-control'>
-          <label htmlFor='cliente'>Cliente</label>
-          <div className="dropdown">
-            <select
-            name='cliente'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.cliente}
-            >
-            <option value="">Seleccione un cliente</option>
-            {optCliente.map((option) => (
-              <option key={option.documento} value={option.documento}>
-              {option.nombre_completo}
-              </option>
-            ))}
-            </select>
+          <div className='form-control'>
+            <label htmlFor='kmRecorridos'>Kms a recorrer</label>
+            <input
+              type='text'
+              name='kmRecorridos'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.kmRecorridos}>
+            </input>
+            {formik.touched.kmRecorridos && formik.errors.kmRecorridos ? <div className='error'>{formik.errors.kmRecorridos}</div> : null}
           </div>
-          { formik.touched.cliente && formik.errors.cliente ? <div className='error'>{formik.errors.cliente}</div> : null}
-        </div>
 
-        <div className='form-control'>
-          <label htmlFor='idChofer'>Chofer</label>
-          <div className="dropdown">
-            <select
-            name='idChofer'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.idChofer}
-            >
-            <option value="">Seleccione un chofer</option>
-            {optChofer.map((option) => (
-              <option key={option.usuarioC} value={option.usuarioC}>
-              {option.nombre_completo}
-              </option>
-            ))}
-            </select>
+          <div className='form-control'>
+            <label htmlFor='origen'>Origen</label>
+            <input
+              type='text'
+              name='origen'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.origen}>
+            </input>
+            {formik.touched.origen && formik.errors.origen ? <div className='error'>{formik.errors.origen}</div> : null}
           </div>
-          { formik.touched.idChofer && formik.errors.idChofer ? <div className='error'>{formik.errors.idChofer}</div> : null}
-        </div>
 
-        <button className='btnSubmit' type='submit'>Crear</button>
-      </form>
+          <div className='form-control'>
+            <label htmlFor='destino'>Destino</label>
+            <input
+              type='text'
+              name='destino'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.destino}>
+            </input>
+            {formik.touched.destino && formik.errors.destino ? <div className='error'>{formik.errors.destino}</div> : null}
+          </div>
+
+          <div className='form-control'>
+            <label htmlFor='matricula'>Matrícula</label>
+            <div className="dropdown">
+              <select
+                name='matricula'
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.matricula}
+              >
+                <option value="">Seleccione una matrícula</option>
+                {optMatricula.map((option) => (
+                  <option key={option.matricula} value={option.matricula}>
+                    {option.matricula}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {formik.touched.matricula && formik.errors.matricula ? <div className='error'>{formik.errors.matricula}</div> : null}
+          </div>
+
+          <div className='form-control'>
+            <label htmlFor='cliente'>Cliente</label>
+            <div className="dropdown">
+              <select
+                name='cliente'
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.cliente}
+              >
+                <option value="">Seleccione un cliente</option>
+                {optCliente.map((option) => (
+                  <option key={option.documento} value={option.documento}>
+                    {option.nombre_completo}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {formik.touched.cliente && formik.errors.cliente ? <div className='error'>{formik.errors.cliente}</div> : null}
+          </div>
+
+          <div className='form-control'>
+            <label htmlFor='idChofer'>Chofer</label>
+            <div className="dropdown">
+              <select
+                name='idChofer'
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.idChofer}
+              >
+                <option value="">Seleccione un chofer</option>
+                {optChofer.map((option) => (
+                  <option key={option.usuarioC} value={option.usuarioC}>
+                    {option.nombre_completo}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {formik.touched.idChofer && formik.errors.idChofer ? <div className='error'>{formik.errors.idChofer}</div> : null}
+          </div>
+
+          <button className='btnSubmit' type='submit'>Crear</button>
+        </form>
+      </FormikProvider>
     </div>
   )
 }
