@@ -200,6 +200,7 @@ export default function UpdateCamion() {
           <label htmlFor='matricula'>Matrícula</label>
           <input
             type='text'
+            readonly="readonly"
             name='matricula'
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
