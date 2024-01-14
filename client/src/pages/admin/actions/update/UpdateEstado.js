@@ -152,7 +152,7 @@ export default function UpdateEstado() {
       />
 
       <form onSubmit={formik.handleSubmit}>
-        <h2 className="form-title">Modificar cliente</h2>
+        <h2 className="form-title">Modificar estado de camiones</h2>
 
         <div className='form-control'>
           <label htmlFor='idEstado'>Id</label>
