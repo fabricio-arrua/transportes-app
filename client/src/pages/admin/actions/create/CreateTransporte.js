@@ -46,36 +46,75 @@ export default function CreateTransporte() {
         Authorization: cookies.get('token'),
       }
     })
-      .then((response) => {
+    .then((response) => {
+      if (response.data.listado){
         setOptMatricula(response.data.listado);
-      })
-      .catch((error) => {
-        console.error('Error obteniendo datos desde API:', error);
-      });
+      } else {
+        toast.error(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
 
     axios.get(`http://localhost:4000/api/clientes/listarCliente`, {
       headers: {
         Authorization: cookies.get('token'),
       }
     })
-      .then((response) => {
+    .then((response) => {
+      if (response.data.listado){
         setOptCliente(response.data.listado);
-      })
-      .catch((error) => {
-        console.error('Error obteniendo datos desde API:', error);
-      });
+      } else {
+        toast.error(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
 
     axios.get(`http://localhost:4000/api/empleados/listadoChofer`, {
       headers: {
         Authorization: cookies.get('token'),
       }
     })
-      .then((response) => {
+    .then((response) => {
+      if (response.data.listado){
         setOptChofer(response.data.listado);
-      })
-      .catch((error) => {
-        console.error('Error obteniendo datos desde API:', error);
-      });
+      } else {
+        toast.error(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
   }, [])
 
   const formik = useFormik({

@@ -143,10 +143,23 @@ export default function CreateCamion() {
       }
     })
       .then((response) => {
-        setOptEstado(response.data.listado);
+        if (response.data.listado){
+          setOptEstado(response.data.listado);
+        } else {
+          toast.error(response.data.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
       })
       .catch((error) => {
-        console.error('Error obteniendo datos desde API:', error);
+        console.log(error.response);
       });
 
     axios.get(`http://localhost:4000/api/tipoCamiones/listadoTipoCamion`, {
@@ -154,12 +167,25 @@ export default function CreateCamion() {
         Authorization: cookies.get('token'),
       }
     })
-      .then((response) => {
+    .then((response) => {
+      if (response.data.listado){
         setOptTipo(response.data.listado);
-      })
-      .catch((error) => {
-        console.error('Error obteniendo datos desde API:', error);
-      });
+      } else {
+        toast.error(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
   }, [])
 
   return (
