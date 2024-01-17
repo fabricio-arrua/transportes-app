@@ -28,10 +28,23 @@ export default function AsignarTransporte() {
         Authorization: cookies.get('token'), 
       }})
       .then((response) => {
-        setOptTransporte(response.data.listado);
+        if (response.data.listado){
+          setOptTransporte(response.data.listado);
+        } else {
+          toast.error(response.data.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
       })
       .catch((error) => {
-        console.error('Error obteniendo datos desde API:', error);
+        console.log(error.response);
       });
     
     axios.get(`http://localhost:4000/api/camiones/listarCamion`, {
@@ -39,10 +52,23 @@ export default function AsignarTransporte() {
         Authorization: cookies.get('token'), 
       }})
       .then((response) => {
-        setOptMatricula(response.data.listado);
+        if (response.data.listado){
+          setOptMatricula(response.data.listado);
+        } else {
+          toast.error(response.data.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
       })
       .catch((error) => {
-        console.error('Error obteniendo datos desde API:', error);
+        console.log(error.response);
       });
   }, []);
 
