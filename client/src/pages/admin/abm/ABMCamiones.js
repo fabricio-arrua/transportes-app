@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from 'semantic-ui-react';
+import { Table, Button, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../../css/misBtns.css';
@@ -14,6 +14,7 @@ const cookies = new Cookies();
 export default function ABMCamiones() {
 
   const [APIData, setAPIData] = useState([]);
+  const [APIError, setAPIError] = useState([]);
   
   useEffect(() => {
     if(cookies.get('tipo') !== 'A'){
@@ -25,10 +26,14 @@ export default function ABMCamiones() {
         Authorization: cookies.get('token'), 
       }})
       .then((response) => {
-        setAPIData(response.data.listado);
+        if (response.data.listado){
+          setAPIData(response.data.listado);
+        } else {
+          setAPIError(response.data.message)
+        }
       })
-      .catch(error => {
-        console.log(error);
+      .catch((error) => {
+        console.log(error.response);
       });
   
   }, [])
@@ -117,6 +122,10 @@ export default function ABMCamiones() {
         pauseOnHover
         theme="colored"
         />
+      
+      <Header as='h1' color='yellow'>
+          {APIError}
+      </Header>
 
       <Table singleLine>
         <Table.Header>

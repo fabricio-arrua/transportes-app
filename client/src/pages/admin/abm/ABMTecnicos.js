@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from 'semantic-ui-react';
+import { Table, Button, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../../css/misBtns.css';
@@ -14,6 +14,7 @@ const cookies = new Cookies();
 export default function ABMTecnicos() {
 
   const [APIData, setAPIData] = useState([]);
+  const [APIError, setAPIError] = useState([]);
   
   useEffect(() => {
     if(cookies.get('tipo') !== 'A'){
@@ -27,8 +28,15 @@ export default function ABMTecnicos() {
         Authorization: cookies.get('token'), 
       }})
       .then((response) => {
+        if (response.data.listado){
           setAPIData(response.data.listado);
+        } else {
+          setAPIError(response.data.message)
+        }
       })
+      .catch((error) => {
+        console.log(error.response);
+      });
   }, [])
 
   const setData = (data) => {
@@ -107,6 +115,10 @@ export default function ABMTecnicos() {
         pauseOnHover
         theme="colored"
         />
+      
+      <Header as='h1' color='yellow'>
+          {APIError}
+      </Header>
         
       <Table singleLine>
         <Table.Header>
