@@ -33,8 +33,6 @@ function RegistrarMantenimiento() {
       window.location.href = '/';
     }
 
-    console.log(cookies.get('token'));
-
     setTecnico(cookies.get('usuario'));
 
     axios.get(`http://localhost:4000/api/camiones/listarCamion`, {
