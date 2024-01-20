@@ -33,6 +33,8 @@ function RegistrarMantenimiento() {
       window.location.href = '/';
     }
 
+    console.log(cookies.get('token'));
+
     setTecnico(cookies.get('usuario'));
 
     axios.get(`http://localhost:4000/api/camiones/listarCamion`, {
@@ -65,8 +67,10 @@ function RegistrarMantenimiento() {
   const formik = useFormik({
     initialValues,
     onSubmit: values => {
-      axios.post(`http://localhost:4000/api/mantenimiento/RegistrarMantenimiento`, {
-        fecha:values.fecha,
+      const date = format(values.fecha, 'yyyy-MM-dd');
+
+      axios.post(`http://localhost:4000/api/mantenimientos/registroMantenimiento`, {
+        fecha:date,
         costo:values.costo,
         observacion:values.observacion,
         matricula:values.matricula,
@@ -195,9 +199,8 @@ function RegistrarMantenimiento() {
             <Field name="fecha">
               {({ field, form }) => (
                 <DatePicker
-                  showTimeSelect
                   minDate={new Date()}
-                  dateFormat="yyyy-MM-dd HH:mm:ss"
+                  dateFormat="yyyy-MM-dd"
                   id="fecha"
                   {...field}
                   selected={field.value}
@@ -211,7 +214,7 @@ function RegistrarMantenimiento() {
           <div className='form-control'>
             <label htmlFor='costo'>Costo</label>
             <input
-              type='text'
+              type='number'
               name='costo'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
