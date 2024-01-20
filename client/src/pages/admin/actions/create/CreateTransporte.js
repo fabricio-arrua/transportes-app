@@ -356,7 +356,7 @@ export default function CreateTransporte() {
         <form onSubmit={formik.handleSubmit}>
           <h2 className="form-title">Registro de transportes</h2>
 
-          <div>
+          <div className='form-control'>
             <label htmlFor="fechaInicio">Fecha/Hora Inicio</label>
             <Field name="fechaInicio">
               {({ field, form }) => (

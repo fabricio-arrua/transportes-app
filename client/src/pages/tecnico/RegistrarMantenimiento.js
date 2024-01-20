@@ -10,7 +10,7 @@ import { mantenimientoValidations } from "../../validations/mantenimientoValidat
 //Dates
 import DatePicker from 'react-datepicker';
 import { format } from 'date-fns';
-import 'react-datepicker/dist/react-datepicker.css';
+//import 'react-datepicker/dist/react-datepicker.css';
 
 const cookies = new Cookies();
 
@@ -192,7 +192,7 @@ function RegistrarMantenimiento() {
         <form onSubmit={formik.handleSubmit}>
           <h2 className="form-title">Registro de mantenimiento</h2>
 
-          <div>
+          <div className='form-control'>
             <label htmlFor="fecha">Fecha</label>
             <Field name="fecha">
               {({ field, form }) => (
@@ -206,7 +206,7 @@ function RegistrarMantenimiento() {
                 />
               )}
             </Field>
-            {formik.touched.fechaInicio && formik.errors.fechaInicio ? <div className='error'>{formik.errors.fechaInicio}</div> : null}
+            {formik.touched.fecha && formik.errors.fecha ? <div className='error'>{formik.errors.fecha}</div> : null}
           </div>
 
           <div className='form-control'>
