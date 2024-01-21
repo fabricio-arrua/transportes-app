@@ -38,15 +38,15 @@ export default function ABMMantenimiento() {
       .catch((error) => {
         console.log(error.response);
       });
-  
   }, [])
 
   const setData = (data) => {
-    let { id_mantenimiento, fecha_mantenimiento, observaciones, estado_mantenimiento, costo, matricula } = data;
+    let { id_mantenimiento, fecha_mantenimiento, observaciones, 
+      estado_mantenimiento, costo, matricula } = data;
     localStorage.setItem('IdMant', id_mantenimiento);
     localStorage.setItem('FechaMant', fecha_mantenimiento);
     localStorage.setItem('ObsMant', observaciones);
-    localStorage.setItem('EstadoMant', estado_mantenimiento)
+    localStorage.setItem('EstadoMant', estado_mantenimiento = "Activo" ? 1 : 0)
     localStorage.setItem('CostoMant', costo)
     localStorage.setItem('MatriculaMant', matricula);
   }
@@ -137,6 +137,7 @@ export default function ABMMantenimiento() {
             <Table.HeaderCell>Fecha</Table.HeaderCell>
             <Table.HeaderCell>Observaciones</Table.HeaderCell>
             <Table.HeaderCell>Costo</Table.HeaderCell>
+            <Table.HeaderCell>Estado</Table.HeaderCell>
             <Table.HeaderCell>Matrícula</Table.HeaderCell>
             <Table.HeaderCell>Modificar</Table.HeaderCell>
             <Table.HeaderCell>Eliminar</Table.HeaderCell>
@@ -151,6 +152,7 @@ export default function ABMMantenimiento() {
                   <Table.Cell>{f.format(Date.parse(data.fecha_mantenimiento))}</Table.Cell>
                   <Table.Cell>{data.observaciones}</Table.Cell>
                   <Table.Cell>{data.costo}</Table.Cell>
+                  <Table.Cell>{data.estado_mantenimiento = 1 ? "Activo" : "Finalizado"}</Table.Cell> 
                   <Table.Cell>{data.matricula}</Table.Cell>
                   <Link to='/updatemantenimiento'>
                     <Table.Cell> 
