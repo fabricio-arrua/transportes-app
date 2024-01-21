@@ -46,8 +46,8 @@ export default function ABMMantenimiento() {
     localStorage.setItem('IdMant', id_mantenimiento);
     localStorage.setItem('FechaMant', fecha_mantenimiento);
     localStorage.setItem('ObsMant', observaciones);
-    localStorage.setItem('EstadoMant', estado_mantenimiento = "Activo" ? 1 : 0)
-    localStorage.setItem('CostoMant', costo)
+    localStorage.setItem('EstadoMant', estado_mantenimiento = "Activo" ? 1 : 0);
+    localStorage.setItem('CostoMant', costo);
     localStorage.setItem('MatriculaMant', matricula);
   }
 
