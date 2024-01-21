@@ -7,7 +7,6 @@ import 'leaflet/dist/leaflet.css';
 import markerIcon from '../../img/marker-icon.png';
 
 const cookies = new Cookies();
-let prueba;
 
 const HomeAdmin = () => {
   const [markers, setMarkers] = useState([]);
