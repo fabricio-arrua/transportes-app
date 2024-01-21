@@ -80,7 +80,7 @@ function RegistrarMantenimiento() {
             },
           }).then((response) => {
             if (response.data.message === 'Registro de mantenimiento realizado con éxito') {
-              navigate('/hometecnico');
+              navigate('/abmmantenimiento');
             } else {
               toast.error(response.data.message, {
                 position: "top-center",
@@ -171,7 +171,7 @@ function RegistrarMantenimiento() {
 
   return (
     <div className="App">
-      <Link to='/hometecnico' className="Btn">
+      <Link to='/abmmantenimiento' className="Btn">
         Volver
       </Link>
 

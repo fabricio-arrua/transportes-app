@@ -11,15 +11,9 @@ export const SidebarDataTecnico = [
       cName: 'nav-text'
     },
     {
-      title: 'Listado de camiones en reparación',
-      path: '/listadocamionesreparacion',
-      icon: <TbIcons.TbList />,
-      cName: 'nav-text'
-    },
-    {
-      title: 'Registrar mantenimiento',
-      path: '/registrarmantenimiento',
-      icon: <GiIcons.GiAutoRepair />,
+      title: 'Mantenimientos',
+      path: '/abmmantenimiento',
+      icon: <GiIcons.GiMechanicGarage />,
       cName: 'nav-text'
     },
     {

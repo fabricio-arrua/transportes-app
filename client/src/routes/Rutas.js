@@ -40,7 +40,8 @@ import ModPassword from '../pages/admin/actions/update/ModPassword'
 import AsignarTransporte from '../pages/admin/actions/AsignarTransporte'
 //pages-tecnico
 import HomeTecnico from '../pages/tecnico/HomeTecnico';
-import ListadoDeCamionesEnReparacion from '../pages/tecnico/ListadoDeCamionesEnReparacion';
+import ABMMantenimiento from '../pages/tecnico/ABMMantenimiento';
+import UpdateMantenimiento from '../pages/tecnico/UpdateMantenimiento';
 import RegistrarMantenimiento from '../pages/tecnico/RegistrarMantenimiento';
 import SolicitudDeMateriales from '../pages/tecnico/SolicitudDeMateriales';
 
@@ -91,7 +92,8 @@ function Rutas() {
           <Route exact path='/listadogastos' Component={ListadoDeGastos}/>
           <Route exact path='/listadotransportesnorealizados' Component={ListadoTransportesNoRealizados}/>
           <Route exact path='/hometecnico' Component={HomeTecnico}/>
-          <Route exact path='/listadocamionesreparacion' Component={ListadoDeCamionesEnReparacion}/>
+          <Route exact path='/abmmantenimiento' Component={ABMMantenimiento}/>
+          <Route exact path='/updatemantenimiento' Component={UpdateMantenimiento}/>
           <Route exact path='/registrarmantenimiento' Component={RegistrarMantenimiento}/>
           <Route exact path='/solicitudmateriales' Component={SolicitudDeMateriales}/>
           <Route exact path='/logout' Component={Logout}/>
