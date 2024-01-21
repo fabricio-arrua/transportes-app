@@ -31,17 +31,23 @@ const HomeAdmin = () => {
       });
       const data = await response.json();
 
-      setMarkers(
-        data.listado.map((item) => ({
-          position: [item.latitud, item.longitud],
-          data: {
-            origen: item.origen,
-            destino: item.destino,
-            matricula: item.matricula,
-            usuarioC: item.usuarioC,
-          },
-        }))
-      );
+      if (data.message == 'No existen transportes en tiempo real'){
+        setMarkers([]);
+      }
+      else{
+        setMarkers(
+          data.listado.map((item) => ({
+            position: [item.latitud, item.longitud],
+            data: {
+              origen: item.origen,
+              destino: item.destino,
+              matricula: item.matricula,
+              usuarioC: item.usuarioC,
+            },
+          }))
+        );
+      }
+      
     } catch (error) {
       console.error('Error al obtener posiciones desde la API', error);
     }
