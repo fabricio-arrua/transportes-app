@@ -30,7 +30,7 @@ function SolicitudDeMateriales() {
     console.log(cookies.get('token'));
 
     //FALTA QUE DIEGO DEFINA LA URL CORRECTA
-    axios.get(`http://localhost:4000/api/mantenimientos/listarMantenimientos`, {
+    axios.get(`http://localhost:4000/api/mantenimientos/listarMantenimiento`, {
       headers: {
         Authorization: cookies.get('token'),
       }
@@ -195,8 +195,8 @@ function SolicitudDeMateriales() {
               >
                 <option value="">Seleccione un mantenimiento</option>
                 {optMantenimientos.map((option) => (
-                  <option key={option.idMantenimiento} value={option.idMantenimiento}>
-                    {option.idMantenimiento}
+                  <option key={option.id_mantenimiento} value={option.id_mantenimiento}>
+                    Id:{option.id_mantenimiento} / Obervación:{option.observaciones} / Matricula:{option.matricula}
                   </option>
                 ))}
               </select>
