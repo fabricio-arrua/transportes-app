@@ -19,6 +19,7 @@ import ListadoChoferesSinTransporte from '../pages/admin/list/ListadoChoferesSin
 import ListadoDeClientes from '../pages/admin/list/ListadoDeClientes';
 import ListadoDeGastos from '../pages/admin/list/ListadoDeGastos';
 import ListadoTransportesNoRealizados from '../pages/admin/list/ListadoTransportesNoRealizados';
+import ListadoSolicitudesMaterial from '../pages/admin/list/ListadoSolicitudesMaterial';
 //pages-admin/actions
 //create
 import CreateChofer from '../pages/admin/actions/create/CreateChofer'
@@ -93,6 +94,7 @@ function Rutas () {
           <Route exact path='/listadoclientes' Component={ListadoDeClientes}/>
           <Route exact path='/listadogastos' Component={ListadoDeGastos}/>
           <Route exact path='/listadotransportesnorealizados' Component={ListadoTransportesNoRealizados}/>
+          <Route exact path='/listadosolicitudesmaterial' Component={ListadoSolicitudesMaterial}/>
           <Route exact path='/hometecnico' Component={HomeTecnico}/>
           <Route exact path='/abmmantenimiento' Component={ABMMantenimiento}/>
           <Route exact path='/updatemantenimiento' Component={UpdateMantenimiento}/>

@@ -84,6 +84,11 @@ export const SidebarData = [
           path: '/listadotransportesnorealizados',
           icon: <TbIcons.TbBoxOff />,
         },
+        {
+          title: 'Solicitudes de materiales',
+          path: '/listadosolicitudesmaterial',
+          icon: <GiIcons.GiPerspectiveDiceSixFacesRandom  />,
+        },
       ]
     },
     {
