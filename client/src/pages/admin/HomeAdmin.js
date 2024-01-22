@@ -10,7 +10,6 @@ const cookies = new Cookies();
 
 const HomeAdmin = () => {
   const [markers, setMarkers] = useState([]);
-  const [selectedMarkerData, setSelectedMarkerData] = useState(null);
 
   const myIcon = new L.Icon({
     iconUrl: markerIcon,
@@ -30,7 +29,7 @@ const HomeAdmin = () => {
       });
       const data = await response.json();
 
-      if (data.message == 'No existen transportes en tiempo real'){
+      if (data.message === 'No existen transportes en tiempo real'){
         setMarkers([]);
       }
       else{
@@ -66,10 +65,6 @@ const HomeAdmin = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const handleMarkerClick = (index) => {
-    setSelectedMarkerData(index);
-  };
-
   return (
     <div className='theme-doc-markdown markdown' style={{width:'70%'}}>
       <div className='playgroundContainer_BKND'>
@@ -85,18 +80,14 @@ const HomeAdmin = () => {
               key={index}
               position={marker.position}
               icon={myIcon}
-              eventHandlers={{
-                click: () => handleMarkerClick(index),
-              }}
             >
-              {selectedMarkerData === index && (
-                <Popup>
-                  Origen: {marker.data.origen}<br/>
-                  Destino: {marker.data.destino}<br/>
-                  Matrícula: {marker.data.matricula}<br/>
-                  Usuario: {marker.data.usuarioC}<br/>
-                </Popup>
-              )}
+              <Popup position={marker.position}>
+                Origen: {marker.data.origen}<br/>
+                Destino: {marker.data.destino}<br/>
+                Matrícula: {marker.data.matricula}<br/>
+                Usuario: {marker.data.usuarioC}<br/>
+              </Popup>
+              
             </Marker>
           ))}
           </MapContainer>

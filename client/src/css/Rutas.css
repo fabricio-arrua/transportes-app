@@ -1,15 +1,44 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
 
 .main{
+  flex: 1; /* La sección principal ocupa todo el espacio disponible */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 85vh;
   background-color: #7b24cb;
   color: whitesmoke;
   flex-direction: column;
+  width: calc(100% - 16%);
+  margin-left: 16%;
 }
 
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #15171c;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    height: auto; /* Cambiar a altura automática en pantallas pequeñas */
+  }
+}
+
+.copyright{
+  text-align: right;
+}
+.contanier{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #7b24cb;
+}
+
+.barraInicial {
+  background-color: #15171c;
+}
 .create-form label{
   color: whitesmoke !important;
   font-family: 'Lato', sans-serif;

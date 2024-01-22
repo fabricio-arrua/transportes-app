@@ -20,7 +20,7 @@ const MaybeShowNavBar = ({children}) => {
   }, [location])
 
   return (
-    <div>{showNavBar && children}</div>
+    <div className='barraInicial' >{showNavBar && children}</div>
   )
 }
 

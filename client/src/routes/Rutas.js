@@ -51,9 +51,11 @@ import NavbarTecnico from '../components/NavbarTecnico';
 import MaybeShowNavBar from '../components/MaybeShowNavBar';
 import MaybeShowNavBarTecnico from '../components/MaybeShowNavBarTecnico';
 
-function Rutas() {
+
+function Rutas () {
   return (
-    <BrowserRouter>
+    <div className='contanier' >
+      <BrowserRouter>
       <MaybeShowNavBar>
         <NavbarAdmin />
       </MaybeShowNavBar>
@@ -99,7 +101,13 @@ function Rutas() {
           <Route exact path='/logout' Component={Logout}/>
         </Routes>
       </div>
+      <div className='footer'>
+        <div className='copyright'>
+          © 2024 Transportes FED. Todos los derechos reservados.
+        </div>
+      </div>
     </BrowserRouter>
+    </div>   
   );
 }
 
