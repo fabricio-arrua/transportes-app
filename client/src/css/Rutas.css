@@ -18,6 +18,7 @@
   padding: 10px;
   background-color: #15171c;
   color: white;
+  margin-top: auto;
 }
 
 @media screen and (max-width: 600px) {

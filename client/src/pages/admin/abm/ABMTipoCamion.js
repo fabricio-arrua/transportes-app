@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Header } from 'semantic-ui-react';
+import { Table, Button, Header, Pagination } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../../css/misBtns.css';
@@ -15,7 +15,24 @@ export default function ABMTipoCamion() {
 
   const [APIData, setAPIData] = useState([]);
   const [APIError, setAPIError] = useState([]);
-  
+  //PAGINADO
+  const [activePage, setActivePage] = useState(1);
+  const itemsPerPage = 5; // Número de elementos por página
+
+  // Calcula el índice del primer y último elemento a mostrar en la página actual
+  const startIndex = (activePage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Filtra los datos para mostrar solo los elementos de la página actual
+  const currentData = APIData.slice(startIndex, endIndex);
+
+  // Calcula el número total de páginas
+  const totalPages = Math.ceil(APIData.length / itemsPerPage);
+
+  const handlePageChange = (e, { activePage }) => {
+    setActivePage(activePage);
+  };
+
   useEffect(() => {
     if(cookies.get('tipo') !== 'A'){
       window.location.href='/';
@@ -136,7 +153,7 @@ export default function ABMTipoCamion() {
         </Table.Header>
 
         <Table.Body>
-          {Object.values(APIData).map((data) => {
+          {currentData.map((data) => {
             return (
               <Table.Row>
                   <Table.Cell>{data.id_tipo}</Table.Cell>
@@ -145,18 +162,24 @@ export default function ABMTipoCamion() {
                   <Table.Cell>{data.cantidad_ejes}</Table.Cell>
                   <Table.Cell>{data.capacidad_carga}</Table.Cell>
                   <Table.Cell>{data.capacidad_combustible}</Table.Cell>
-                  <Link to='/abm/abmtipocamion/UpdateTipo'>
-                    <Table.Cell> 
+                  <Table.Cell> 
+                    <Link to='/abm/abmtipocamion/UpdateTipo'>
                       <Button onClick={() => setData(data)}><AiIcons.AiOutlineEdit /></Button>
-                    </Table.Cell>
-                  </Link>
+                    </Link>
+                  </Table.Cell>
                   <Table.Cell>
                     <Button onClick={() => {onDelete(data);}}><FaIcons.FaTrash /></Button>
                   </Table.Cell>
                 </Table.Row>
           )})}
         </Table.Body>
-      </Table>
+      </Table>     
+      {/* Componente de paginación */}
+      <Pagination
+        activePage={activePage}
+        onPageChange={handlePageChange}
+        totalPages={totalPages}
+      />
     </div>
   )
 }

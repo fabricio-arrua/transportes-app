@@ -308,7 +308,7 @@ export default function UpdateTransporte() {
             {formik.touched.fechaInicio && formik.errors.fechaInicio ? <div className='error'>{formik.errors.fechaInicio}</div> : null}
           </div>
 
-          <div>
+          <div className='form-control'>
             <label htmlFor="fechaFin">Fecha/Hora Fin</label>
             <Field name="fechaFin">
               {({ field, form }) => (
