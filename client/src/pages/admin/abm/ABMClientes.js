@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Header,Pagination } from 'semantic-ui-react';
+import { Table, Button, Header, Pagination } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../../css/misBtns.css';

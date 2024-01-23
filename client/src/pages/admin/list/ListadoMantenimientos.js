@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Header, Pagination } from 'semantic-ui-react';
+import { Table, Button, Header, Pagination } from 'semantic-ui-react';
 import axios from 'axios';
-import '../../../css/misBtns.css';
 import { Link } from 'react-router-dom';
+import '../../../css/misBtns.css';
+import ExcelExport from '../actions/ExcelExport';
 import Cookies from 'universal-cookie';
+import * as FaIcons from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const cookies = new Cookies();
 
-export default function ListadoSolicitudesMaterial() {
+export default function ListadoMantenimientos() {
 
   const [APIData, setAPIData] = useState([]);
   const [APIError, setAPIError] = useState([]);
@@ -36,14 +39,13 @@ export default function ListadoSolicitudesMaterial() {
       window.location.href = '/';
     }
 
-    axios.get(`http://localhost:4000/api/solicitudMateriales/listadoSolicitudMaterialesMantenimineto`, {
-      idMantenimiento:localStorage.getItem('IdMant')
-    },
-      {
-        headers: {
-          Authorization: cookies.get('token'),
-        }
-      })
+    console.log(cookies.get('token'));
+
+    axios.get(`http://localhost:4000/api/mantenimientos/listarMantenimiento`, {
+      headers: {
+        Authorization: cookies.get('token'),
+      }
+    })
       .then((response) => {
         if (response.data.listado) {
           setAPIData(response.data.listado);
@@ -125,11 +127,16 @@ export default function ListadoSolicitudesMaterial() {
       });
   }, [])
 
+  const setData = (data) => {
+    let { id_mantenimiento } = data;
+    localStorage.setItem('IdMant', id_mantenimiento);
+  }
+
   return (
     <div>
-      <Link to='/listadomantenimientos'>
-        <button className='Btn'>Volver</button>
-      </Link>
+      <ExcelExport excelData={APIData} fileName={"Mantenimientos"} />
+
+      <h1>Listado de mantenimientos</h1>
 
       <ToastContainer
         position="top-center"
@@ -142,7 +149,7 @@ export default function ListadoSolicitudesMaterial() {
         draggable
         pauseOnHover
         theme="colored"
-        />
+      />
 
       <Header as='h1' color='yellow'>
         {APIError}
@@ -151,11 +158,13 @@ export default function ListadoSolicitudesMaterial() {
       <Table singleLine>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Id Solicitud</Table.HeaderCell>
-            <Table.HeaderCell>Id Mantenimiento</Table.HeaderCell>
-            <Table.HeaderCell>Producto</Table.HeaderCell>
-            <Table.HeaderCell>Cantidad</Table.HeaderCell>
+            <Table.HeaderCell>Id</Table.HeaderCell>
+            <Table.HeaderCell>Fecha</Table.HeaderCell>
+            <Table.HeaderCell>Observaciones</Table.HeaderCell>
+            <Table.HeaderCell>Costo</Table.HeaderCell>
             <Table.HeaderCell>Estado</Table.HeaderCell>
+            <Table.HeaderCell>Matrícula</Table.HeaderCell>
+            <Table.HeaderCell>Solicitudes de materiales</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -163,11 +172,17 @@ export default function ListadoSolicitudesMaterial() {
           {currentData.map((data) => {
             return (
               <Table.Row>
-                <Table.Cell>{data.id_solicitud}</Table.Cell>
                 <Table.Cell>{data.id_mantenimiento}</Table.Cell>
-                <Table.Cell>{data.producto_solicitado}</Table.Cell>
-                <Table.Cell>{data.cantidad}</Table.Cell>
-                <Table.Cell>{data.estado}</Table.Cell>
+                <Table.Cell>{f.format(Date.parse(data.fecha_mantenimiento))}</Table.Cell>
+                <Table.Cell>{data.observaciones}</Table.Cell>
+                <Table.Cell>{data.costo}</Table.Cell>
+                <Table.Cell>{data.estado_mantenimiento = 1 ? "Activo" : "Finalizado"}</Table.Cell>
+                <Table.Cell>{data.matricula}</Table.Cell>
+                <Table.Cell>
+                  <Link to='/listadosolicitudesmaterial'>
+                    <Button onClick={() => setData(data)}><FaIcons.FaEye /></Button>
+                  </Link>
+                </Table.Cell>
               </Table.Row>
             )
           })}

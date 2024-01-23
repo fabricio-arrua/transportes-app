@@ -85,9 +85,9 @@ export const SidebarData = [
           icon: <TbIcons.TbBoxOff />,
         },
         {
-          title: 'Solicitudes de materiales',
-          path: '/listadosolicitudesmaterial',
-          icon: <GiIcons.GiPerspectiveDiceSixFacesRandom  />,
+          title: 'Mantenimientos',
+          path: '/listadomantenimientos',
+          icon: <GiIcons.GiMechanicGarage />,
         },
       ]
     },
