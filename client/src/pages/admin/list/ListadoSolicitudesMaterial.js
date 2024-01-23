@@ -12,7 +12,6 @@ export default function ListadoSolicitudesMaterial() {
 
   const [APIData, setAPIData] = useState([]);
   const [APIError, setAPIError] = useState([]);
-  const f = new Intl.DateTimeFormat("en-BG", { dateStyle: 'short', timeStyle: 'short' });
   //PAGINADO
   const [activePage, setActivePage] = useState(1);
   const itemsPerPage = 5; // Número de elementos por página
@@ -37,7 +36,7 @@ export default function ListadoSolicitudesMaterial() {
     }
 
     axios.get(`http://localhost:4000/api/solicitudMateriales/listadoSolicitudMaterialesMantenimineto`, {
-      idMantenimiento:localStorage.getItem('IdMant')
+      params: { idMantenimiento: localStorage.getItem('IdMant') }
     },
       {
         headers: {
@@ -142,7 +141,7 @@ export default function ListadoSolicitudesMaterial() {
         draggable
         pauseOnHover
         theme="colored"
-        />
+      />
 
       <Header as='h1' color='yellow'>
         {APIError}
