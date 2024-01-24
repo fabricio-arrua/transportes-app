@@ -36,9 +36,7 @@ export default function ListadoSolicitudesMaterial() {
     }
 
     axios.get(`http://localhost:4000/api/solicitudMateriales/listadoSolicitudMaterialesMantenimineto`, {
-      params: { idMantenimiento: localStorage.getItem('IdMant') }
-    },
-      {
+        params: { idMantenimiento: localStorage.getItem('IdMant') },
         headers: {
           Authorization: cookies.get('token'),
         }
