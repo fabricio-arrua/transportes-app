@@ -12,6 +12,13 @@ export default function ListadoSolicitudesMaterial() {
 
   const [APIData, setAPIData] = useState([]);
   const [APIError, setAPIError] = useState([]);
+
+  let estados = [
+    { label: "Pendiente", value: "Pendiente" },
+    { label: "Realizada", value: "Realizada" },
+    { label: "Rechazada", value: "Rechazada" }
+  ]
+
   //PAGINADO
   const [activePage, setActivePage] = useState(1);
   const itemsPerPage = 5; // Número de elementos por página
@@ -50,7 +57,7 @@ export default function ListadoSolicitudesMaterial() {
       })
       .catch(function (error) {
         if (error.response) {
-          console.log(error.response.data + 'error.response.data');
+          console.log(error.response.data + 'error.response.idata');
           toast.error(error.response.data, {
             position: "top-center",
             autoClose: 5000,
@@ -122,6 +129,136 @@ export default function ListadoSolicitudesMaterial() {
       });
   }, [])
 
+  const cambiarEstado = (e, data) => {
+
+    let { id_solicitud } = data;
+    const idSolicitud = id_solicitud;
+
+    axios.post(`http://localhost:4000/api/solicitudMateriales/cambiarEstado/`, {
+      idSolicitud,
+      estado:e.target.value
+    },
+    {
+      headers: {
+        Authorization: cookies.get('token'), 
+      },
+    }).then((response) => {
+      if(response.data.message === 'Cambio de estado realizado con éxito'){
+        toast.success(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      } else {
+        toast.error(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      }
+
+      getData();
+    })
+  }
+
+  const getData = () => {
+    axios.get(`http://localhost:4000/api/solicitudMateriales/listadoSolicitudMaterialesMantenimineto`, {
+        params: { idMantenimiento: localStorage.getItem('IdMant') },
+        headers: {
+          Authorization: cookies.get('token'),
+        }
+      })
+      .then((response) => {
+        if (response.data.listado) {
+          setAPIData(response.data.listado);
+        } else {
+          setAPIError(response.data.message)
+        }
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data + 'error.response.idata');
+          toast.error(error.response.data, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          console.log(error.response.status + 'error.response.status');
+          toast.error('Error comuniquese con sistemas', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          console.log(error.response.header + 'error.response.header');
+          toast.error(error.response.headers, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        } else if (error.request) {
+          console.log(error.request + 'error.request');
+          toast.error(error.request, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        } else {
+          console.log(error.message + 'error.message');
+          toast.error(error.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+        console.log(error.config + 'error.config');
+        toast.error(error.config, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      });
+  }
+
   return (
     <div>
       <Link to='/listadomantenimientos'>
@@ -164,7 +301,21 @@ export default function ListadoSolicitudesMaterial() {
                 <Table.Cell>{data.id_mantenimiento}</Table.Cell>
                 <Table.Cell>{data.producto_solicitado}</Table.Cell>
                 <Table.Cell>{data.cantidad}</Table.Cell>
-                <Table.Cell>{data.estado}</Table.Cell>
+                <Table.Cell>
+                  <div className="dropdown">
+                    <select
+                    value={data.estado}
+                    onChange={(e) => {cambiarEstado(e, data);}}
+                    >
+                    <option value="">Seleccione un estado</option>
+                    {estados.map((option) => (
+                      <option key={option.value} value={option.value}>
+                      {option.label}
+                      </option>
+                    ))}
+                    </select>
+                  </div>
+                </Table.Cell>
               </Table.Row>
             )
           })}
