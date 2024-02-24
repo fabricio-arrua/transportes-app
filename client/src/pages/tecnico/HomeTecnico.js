@@ -36,9 +36,11 @@ export default function HomeTecnico() {
   }, [])
 
   return (
-    <div>
+    <div className="components">
+      
+      <h1>LISTADO HISTORICO DE MANTENIMIENTO</h1>
       <ExcelExport excelData={APIData} fileName={"Listado de camiones en reparación"} />
-
+      
       <Header as='h1' color='yellow'>
           {APIError}
       </Header>

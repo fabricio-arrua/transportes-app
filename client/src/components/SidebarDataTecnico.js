@@ -23,6 +23,12 @@ export const SidebarDataTecnico = [
       cName: 'nav-text'
     },
     {
+      title: 'Cambiar Contraseña',
+      path: '/cambiarcontraseña',
+      icon: <TbIcons.TbShoppingCartPlus />,
+      cName: 'nav-text'
+    },
+    {
       title: 'Cerrar sesión',
       path: '/logout',
       icon: <TbIcons.TbLogout2 />,

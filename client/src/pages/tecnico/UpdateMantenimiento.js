@@ -45,7 +45,7 @@ export default function UpdateMantenimiento() {
     setCosto(localStorage.getItem('CostoMant'));
     setUsu(cookies.get('usuario'));
 
-    axios.get(`http://localhost:4000/api/camiones/listarCamion`, {
+    axios.get(`http://localhost:4000/api/camiones/listarCamionesMantenimiento`, {
       headers: {
         Authorization: cookies.get('token'),
       }
@@ -190,7 +190,7 @@ export default function UpdateMantenimiento() {
   })
 
   return (
-    <div>
+    <div className="App">
       <Link to='/abmmantenimiento'>
         <button className='Btn'>Volver</button>
       </Link>
