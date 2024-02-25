@@ -24,7 +24,6 @@ export default function UpdateMantenimiento() {
   const [ccosto, setCosto] = useState('');
   const [mmatricula, setMatricula] = useState('');
   const [usuarioT, setUsu] = useState('');
-  const [optMatricula, setOptMatricula] = useState([]);
   const navigate = useNavigate();
 
   let estados = [
@@ -44,32 +43,6 @@ export default function UpdateMantenimiento() {
     setMatricula(localStorage.getItem('MatriculaMant'));
     setCosto(localStorage.getItem('CostoMant'));
     setUsu(cookies.get('usuario'));
-
-    axios.get(`http://localhost:4000/api/camiones/listarCamionesMantenimiento`, {
-      headers: {
-        Authorization: cookies.get('token'),
-      }
-    })
-      .then((response) => {
-        if (response.data.listado) {
-          setOptMatricula(response.data.listado);
-        } else {
-          toast.error(response.data.message, {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-
   }, []);
 
   const formik = useFormik({
@@ -91,7 +64,7 @@ export default function UpdateMantenimiento() {
         observaciones: values.observaciones,
         estadoMantenimento: values.estadoMantenimento,
         costo: values.costo,
-        matricula: values.matricula,
+        matricula: mmatricula,
         usuarioT
       },
         {
@@ -285,27 +258,6 @@ export default function UpdateMantenimiento() {
             </input>
             {formik.touched.costo && formik.errors.costo ? <div className='error'>{formik.errors.costo}</div> : null}
           </div>
-
-          <div className='form-control'>
-            <label htmlFor='matricula'>Matrícula</label>
-            <div className="dropdown">
-              <select
-                name='matricula'
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.matricula}
-              >
-                <option value="">Seleccione una matrícula</option>
-                {optMatricula.map((option) => (
-                  <option key={option.matricula} value={option.matricula}>
-                    {option.matricula}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {formik.touched.matricula && formik.errors.matricula ? <div className='error'>{formik.errors.matricula}</div> : null}
-          </div>
-
           <button className='btnSubmit' type='submit'>Modificar</button>
         </form>
       </FormikProvider>

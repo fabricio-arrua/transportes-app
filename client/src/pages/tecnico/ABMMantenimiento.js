@@ -22,8 +22,6 @@ export default function ABMMantenimiento() {
       window.location.href='/';
     }
 
-    console.log(cookies.get('token'));
-
     axios.get(`http://localhost:4000/api/mantenimientos/listarMantenimiento`, {
       headers: {
         Authorization: cookies.get('token'), 

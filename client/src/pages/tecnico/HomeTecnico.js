@@ -11,6 +11,7 @@ export default function HomeTecnico() {
 
   const [APIData, setAPIData] = useState([]);
   const [APIError, setAPIError] = useState([]);
+  const f = new Intl.DateTimeFormat("es-UY", {dateStyle: 'short'});
 
   useEffect(() => {
     if(cookies.get('tipo') !== 'T'){
@@ -49,11 +50,11 @@ export default function HomeTecnico() {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Matricula</Table.HeaderCell>
-            <Table.HeaderCell>Año</Table.HeaderCell>
-            <Table.HeaderCell>Marca</Table.HeaderCell>
-            <Table.HeaderCell>Kilómetros</Table.HeaderCell>
+            <Table.HeaderCell>Fecha Mantenimiento</Table.HeaderCell>
+            <Table.HeaderCell>Técnico</Table.HeaderCell>
+            <Table.HeaderCell>Costo</Table.HeaderCell>
+            <Table.HeaderCell>Observaciones</Table.HeaderCell>
             <Table.HeaderCell>Estado</Table.HeaderCell>
-            <Table.HeaderCell>Tipo</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -62,11 +63,11 @@ export default function HomeTecnico() {
             return (
               <Table.Row>
                   <Table.Cell>{data.matricula}</Table.Cell>
-                  <Table.Cell>{data.anio}</Table.Cell>
-                  <Table.Cell>{data.marca}</Table.Cell>
-                  <Table.Cell>{data.kilometros}</Table.Cell>
-                  <Table.Cell>{data.id_estado}</Table.Cell>
-                  <Table.Cell>{data.id_tipo}</Table.Cell>
+                  <Table.Cell>{f.format(Date.parse(data.fecha_mantenimiento))}</Table.Cell>
+                  <Table.Cell>{data.usuarioT}</Table.Cell>
+                  <Table.Cell>{data.costo}</Table.Cell>
+                  <Table.Cell>{data.observaciones}</Table.Cell>
+                  <Table.Cell>{data.estado_mantenimiento}</Table.Cell>
                 </Table.Row>
           )})}
         </Table.Body>

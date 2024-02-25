@@ -2,6 +2,7 @@ import React from 'react'
 import * as AiIcons from 'react-icons/ai';
 import * as TbIcons from "react-icons/tb";
 import * as GiIcons from "react-icons/gi";
+import { GoPasskeyFill } from "react-icons/go";
 
 export const SidebarDataTecnico = [
     {
@@ -25,7 +26,7 @@ export const SidebarDataTecnico = [
     {
       title: 'Cambiar Contraseña',
       path: '/cambiarcontraseña',
-      icon: <TbIcons.TbShoppingCartPlus />,
+      icon: <GoPasskeyFill />,
       cName: 'nav-text'
     },
     {
