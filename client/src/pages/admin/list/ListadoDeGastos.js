@@ -5,8 +5,11 @@ import '../../../css/misBtns.css';
 import ExcelExport from '../actions/ExcelExport';
 import Cookies from 'universal-cookie';
 import * as FaIcons from 'react-icons/fa';
-import Popup from '../../../components/PopUp';
+import Popup from 'reactjs-popup';
 import { toast, ToastContainer } from 'react-toastify';
+import 'reactjs-popup/dist/index.css';
+import '../../../css/Popup.css'; // Importa el archivo CSS para estilos del pop-up
+import { FaImages } from "react-icons/fa6";
 
 const cookies = new Cookies();
 
@@ -14,7 +17,7 @@ export default function ListadoDeGastos() {
 
   const [APIData, setAPIData] = useState([]);
   const [selectedTransportId, setSelectedTransportId] = useState(null);
-
+  const [transportDetails, setTransportDetails] = useState([]);
   //PAGINADO
   const [activePage, setActivePage] = useState(1);
   const itemsPerPage = 5; // Número de elementos por página
@@ -74,15 +77,35 @@ export default function ListadoDeGastos() {
     setActivePage(activePage);
   };
 
-  const handleDetailClick = (transportId) => {
-    // Aquí podrías abrir el pop-up o realizar alguna acción para mostrar más detalles
-    // También puedes realizar una consulta a la base de datos aquí utilizando el transportId
-    // y manejar la lógica para mostrar los detalles en el pop-up
+  const handleOpenPopup = async (transportId) => {
     setSelectedTransportId(transportId);
+    try {
+      const response = await axios.get(`http://localhost:4000/api/gastos/listarGastosPorTransporte`, {
+        params: { idTransporte: transportId },
+        headers: {
+          Authorization: cookies.get('token'),
+        }
+      });
+      if (response.data.listado) {
+        setTransportDetails(response.data.listado);
+      }
+    } catch (error) {
+      toast.error('Error, comuniquese con sistemas', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
   };
 
   const handleClosePopup = () => {
-    setSelectedTransportId(null);
+    // Aquí actualizas el valor de la variable a vacío cuando se cierra el Pop Up
+    setTransportDetails([]);
   };
 
   return (
@@ -132,7 +155,35 @@ export default function ListadoDeGastos() {
                 <Table.Cell>{data.telefono}</Table.Cell>
                 <Table.Cell>$ {data.total_gasto}</Table.Cell>
                 <Table.Cell>
-                  <Button onClick={() => handleDetailClick(data.id_transporte)}><FaIcons.FaEye /></Button>
+                  <Popup
+                    trigger={<Button><FaIcons.FaEye /></Button>}
+                    modal
+                    nested
+                    onOpen={() => handleOpenPopup(data.id_transporte)}
+                    onClose={handleClosePopup}
+                  >
+                    {close => (
+                      <div className="modals">
+                        <button className="close" onClick={close}>
+                          &times;
+                      </button>
+                        <div className="header"> Gastos del transporte {selectedTransportId} </div>
+                        <div className="content">
+                          {' '}
+                          <ul>
+                            {transportDetails.map((expense) => (
+                              <li key={expense.id_gasto}>
+                                <b>Monto:</b> $ {expense.monto_gasto} <b>Observaciones:</b> {expense.observaciones} <b>Fecha:</b> {f.format(Date.parse(expense.fecha_gasto))}
+                                {expense.url_imagen && ( // Verifica si hay una URL de imagen
+                                  <button className='btn' onClick={() => window.open(expense.url_imagen, '_blank')} title="Ver imagen" ><FaImages /></button>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    )}
+                  </Popup>
                 </Table.Cell>
 
               </Table.Row>
@@ -148,7 +199,7 @@ export default function ListadoDeGastos() {
         totalPages={totalPages}
       />
 
-    {selectedTransportId && <Popup transportId={selectedTransportId} onClose={handleClosePopup} />}
+  
     </div>
   )
 }
