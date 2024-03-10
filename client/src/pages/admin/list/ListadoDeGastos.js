@@ -10,6 +10,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'reactjs-popup/dist/index.css';
 import '../../../css/Popup.css'; // Importa el archivo CSS para estilos del pop-up
 import { FaImages } from "react-icons/fa6";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const cookies = new Cookies();
 
@@ -18,11 +20,14 @@ export default function ListadoDeGastos() {
   const [APIData, setAPIData] = useState([]);
   const [selectedTransportId, setSelectedTransportId] = useState(null);
   const [transportDetails, setTransportDetails] = useState([]);
+  const [filter, setFilter] = useState({ startDate: '',endDate: ''});
+  const [sortBy, setSortBy] = useState('total_gasto');
+  const [sortDirection, setSortDirection] = useState('desc');
   //PAGINADO
   const [activePage, setActivePage] = useState(1);
   const itemsPerPage = 5; // Número de elementos por página
   
-  const f = new Intl.DateTimeFormat("en-BG", {dateStyle: "short"});
+  const f = new Intl.DateTimeFormat("es-UY", {dateStyle: 'short', timeStyle: 'short'});
 
   useEffect(() => {
     if(cookies.get('tipo') !== 'A'){
@@ -63,18 +68,36 @@ export default function ListadoDeGastos() {
       });
   }, [])
 
+
+
   // Calcula el índice del primer y último elemento a mostrar en la página actual
   const startIndex = (activePage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
+  // Filtra los datos según los valores ingresados en los campos de filtro
+  const filteredData = APIData.filter((item) => {
+    const startDateMatch = !filter.startDate || Date.parse(item.fecha_hora_inicio) >= filter.startDate;
+    const endDateMatch = !filter.endDate || Date.parse(item.fecha_hora_fin) <= filter.endDate;
+    return startDateMatch && endDateMatch ;
+  });
+
   // Filtra los datos para mostrar solo los elementos de la página actual
-  const currentData = APIData.slice(startIndex, endIndex);
+  const currentData = filteredData.slice(startIndex, endIndex);
 
   // Calcula el número total de páginas
   const totalPages = Math.ceil(APIData.length / itemsPerPage);
 
   const handlePageChange = (e, { activePage }) => {
     setActivePage(activePage);
+  };
+
+  // Maneja el cambio en el campo de filtro de Fecha de Inicio
+  const handleStartDateChange = (date) => {
+    setFilter({ ...filter, startDate: date });
+  };
+
+  const handleEndDateChange = (date) => {
+    setFilter({ ...filter, endDate: date });
   };
 
   const handleOpenPopup = async (transportId) => {
@@ -108,6 +131,26 @@ export default function ListadoDeGastos() {
     setTransportDetails([]);
   };
 
+  // Ordena los datos según la columna especificada y la dirección de ordenamiento
+  const sortedData = [...currentData].sort((a, b) => {
+    const aValue = a[sortBy];
+    const bValue = b[sortBy];
+    if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
+    if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  const handleSort = (columnName) => {
+    if (sortBy === columnName) {
+      // Cambia la dirección de ordenamiento si la columna ya está ordenada
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      // Si es una nueva columna, establece la columna de ordenamiento y la dirección ascendente
+      setSortBy(columnName);
+      setSortDirection('asc');
+    }
+  };
+
   return (
     <div style={{width:'70%'}}>
       <ExcelExport excelData={APIData} fileName={"Listado de gastos"} />
@@ -127,23 +170,50 @@ export default function ListadoDeGastos() {
         theme="colored"
       />
 
+      <div className='row'>
+        <div className='col-3'>
+            <label htmlFor='desde'>Desde</label>
+            <DatePicker
+              selected={filter.startDate}
+              name='desde'
+              onChange={handleStartDateChange}
+              placeholderText="Seleccionar Inicio"
+            />
+        </div>
+        <div className='col-3'>
+            <label htmlFor='hasta'>Hasta</label>
+            <DatePicker
+              selected={filter.endDate}
+              name='hasta'
+              onChange={handleEndDateChange}
+              placeholderText="Seleccionar Fin"
+            />
+        </div>
+      </div>
+
       <Table singleLine>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Id Transporte</Table.HeaderCell>
+            <Table.HeaderCell>Ticket Transporte</Table.HeaderCell>
             <Table.HeaderCell>Fecha Inicio</Table.HeaderCell>
             <Table.HeaderCell>Fecha Fin</Table.HeaderCell>
             <Table.HeaderCell>Matricula</Table.HeaderCell>
             <Table.HeaderCell>Chofer</Table.HeaderCell>
             <Table.HeaderCell>Cliente</Table.HeaderCell>
             <Table.HeaderCell>Telefono</Table.HeaderCell>
-            <Table.HeaderCell>Gasto Total</Table.HeaderCell>
+            <Table.HeaderCell
+              onClick={() => handleSort('total_gasto')} // Agrega la función de ordenamiento al encabezado de la columna "Gasto Total"
+              style={{ cursor: 'pointer' }} // Cambia el cursor para indicar que es clickable
+            >
+              Gasto Total
+              {sortBy === 'total_gasto' && (sortDirection === 'asc' ? ' ↑' : ' ↓')} {/* Agrega indicadores de dirección de ordenamiento */}
+            </Table.HeaderCell>
             <Table.HeaderCell>Ver Detalle</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
-        {currentData.map((data) => {
+        {sortedData.map((data) => {
             return (
               <Table.Row key={data.id_transporte}>
                 <Table.Cell>{data.id_transporte}</Table.Cell>
